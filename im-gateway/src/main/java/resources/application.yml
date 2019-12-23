@@ -1,0 +1,74 @@
+ 
+spring:
+  application:
+    name: im
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    hikari:
+      maximum-pool-size: 100
+      minimum-idle: 10
+  redis:
+    timeout: 5000ms
+    jedis:
+      pool:
+        max-active: 100
+        max-wait: 5000ms
+        max-idle: 50
+        min-idle: 10
+
+
+
+tcp.socket.port: 8081
+tcp.ws.port: 8082
+
+spring.kafka.bootstrap-servers: 118.25.8.208:9092
+spring.kafka.producer.value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+spring.kafka.consumer.value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+spring.kafka.producer.retries: 0
+
+
+
+# 每次批量发送消息的数量,produce积累到一定数据，一次发送
+spring.kafka.producer.batch-size: 16384
+# produce积累数据一次发送，缓存大小达到buffer.memory就发送数据
+spring.kafka.producer.buffer-memory: 33554432
+spring.kafka.producer.acks: all
+spring.kafka.consumer.group-id: im-group
+spring.kafka.consumer.auto-offset-reset: earliest
+spring.kafka.consumer.enable-auto-commit: true
+spring.kafka.consumer.auto-commit-interval: 100
+
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+ 
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+ 
+
+config:
+  apidoc: false
+  j2cache:
+    enabled: false
+ 
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
+
+
+
+
+ 
+
+
+

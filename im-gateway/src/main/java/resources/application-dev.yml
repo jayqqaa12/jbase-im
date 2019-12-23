@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://47.103.55.121:3306/temp?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 'jibaoyuan_521'
+
+  redis:
+    host: 47.103.55.121
+    port: 6379
+    password: LrnhYxVkj7swbDt0
+    database: 10
+
+
+#  shardingsphere:
+#      datasource:
+#        names: ds
+#        ds:
+#          type: com.zaxxer.hikari.HikariDataSource
+#          driver-class-name: com.mysql.jdbc.Driver
+#          jdbc-url: jdbc:mysql://47.103.55.121:3306/geomance
+#          username: root
+#          password: jibaoyuan_521
+#      sharding:
+#        tables:
+#          im_msg:
+#            actual-data-nodes: ds.im_msg_$->{0..1}
+#            table-strategy:
+#              inline:
+#                sharding-column: dest_userid
+#                algorithm-expression: im_msg_$->{dest_userid % 2}
+#            key-generator:                                     
+#              column: id
+#              type: SNOWFLAKE
+#          binding-tables: im_msg
