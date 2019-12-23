@@ -1,5 +1,5 @@
 
-package com.jayqqaa12.im.gateway.config;
+package com.jayqqaa12.im.business.config;
 
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.injector.DefaultSqlInjector;

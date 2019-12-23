@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.gateway.support;
+package com.jayqqaa12.im.business.support;
 
 import com.jayqqaa12.im.common.model.consts.CacheConstants;
 import org.springframework.beans.factory.annotation.Autowired;

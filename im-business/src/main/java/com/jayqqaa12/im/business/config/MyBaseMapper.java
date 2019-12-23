@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.gateway.config;
+package com.jayqqaa12.im.business.config;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;

@@ -6,11 +6,11 @@
 
 功能性需求
 
-![image](https://github.com/jayqqaa12/jbase-im/doc/1.png)
+![image](https://github.com/jayqqaa12/jbase-im/blob/master/doc/1.png?raw=true)
 
 非功能性需求
 
-![image](https://github.com/jayqqaa12/jbase-im/doc/2.png)
+![image](https://github.com/jayqqaa12/jbase-im/blob/master/doc/2.png?raw=true)
 
 
 

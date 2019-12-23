@@ -6,12 +6,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-
+import org.springframework.context.annotation.ComponentScan;
 
 
 @EnableBasic
 @EnableDb
 @SpringBootApplication
+@ComponentScan("com.jayqqaa12.im")
 @MapperScan("com.jayqqaa12.im.*.mapper")
 public class IMApplication {
 
