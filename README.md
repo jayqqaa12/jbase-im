@@ -6,11 +6,11 @@
 
 功能性需求
 
-[image](https://s2.ax1x.com/2019/12/23/lpNies.png)
+![image](https://s2.ax1x.com/2019/12/23/lpNies.png)
 
 非功能性需求
 
-[image](https://s2.ax1x.com/2019/12/23/lpN9yQ.png)
+![image](https://s2.ax1x.com/2019/12/23/lpN9yQ.png)
 
 
 
