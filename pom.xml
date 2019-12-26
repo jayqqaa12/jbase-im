@@ -1,212 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.5.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    
-    <groupId>com.jayqqaa12</groupId>
-    <artifactId>jbase-im</artifactId>
-    <version>1.0.0</version>
-    <packaging>pom</packaging>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.5.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>com.jayqqaa12</groupId>
+  <artifactId>jbase-im</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
 
 
-    <modules>
-        <module>im-common</module>
-        <module>im-gateway</module>
-        <module>im-business</module>
-    </modules>
+  <modules>
+    <module>im-common</module>
+    <module>im-gateway</module>
+    <module>im-business</module>
+  </modules>
 
 
-    <properties>
+  <properties>
 
-        <docker.plugin.version>1.0.0</docker.plugin.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-        <project.build.source.version>1.8</project.build.source.version>
-        <project.build.target.version>1.8</project.build.target.version>
+    <docker.plugin.version>1.0.0</docker.plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
+    <project.build.source.version>1.8</project.build.source.version>
+    <project.build.target.version>1.8</project.build.target.version>
 
-        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
-        <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
-
-
-        <lombok.version>1.16.14</lombok.version>
-        <netty.version>4.1.23.Final</netty.version>
-        <druid.version>1.0.20</druid.version>
-        <fastjson.version>1.2.38</fastjson.version>
-        <zookeeper.version>3.4.6</zookeeper.version>
-
-        <mybatisplus-boot-starter.version>3.1.2</mybatisplus-boot-starter.version>
-        <mysql.version>5.1.44</mysql.version>
-
-        <jasypt.version>1.18</jasypt.version>
-        <commons-io.version>2.6</commons-io.version>
-        <commons-beans.version>1.8.3</commons-beans.version>
-        <kaptcha.version>0.0.9</kaptcha.version>
-
-        <hutool.version>4.5.0</hutool.version>
-        <auth.version>2.0.0</auth.version>
-        <sms.version>2.0.0</sms.version>
-        <admin.version>1.0.0</admin.version>
-        <boot.version>2.0.0</boot.version>
+    <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
+    <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
 
 
-        <jbase.util.version>2.2.4</jbase.util.version>
-        <jbase.spring.version>2.2.12</jbase.spring.version>
-        <jbase.cache.version>2.2.16</jbase.cache.version>
-        <jmeter.version>5.1.1</jmeter.version>
+    <lombok.version>1.16.14</lombok.version>
+    <netty.version>4.1.23.Final</netty.version>
+    <druid.version>1.0.20</druid.version>
+    <fastjson.version>1.2.38</fastjson.version>
+    <zookeeper.version>3.4.6</zookeeper.version>
 
-        <sharding.jdbc.version>4.0.0-RC1</sharding.jdbc.version>
-    </properties>
+    <mybatisplus-boot-starter.version>3.1.2</mybatisplus-boot-starter.version>
+    <mysql.version>5.1.44</mysql.version>
 
-    <dependencyManagement>
+    <jasypt.version>1.18</jasypt.version>
+    <commons-io.version>2.6</commons-io.version>
+    <commons-beans.version>1.8.3</commons-beans.version>
+    <kaptcha.version>0.0.9</kaptcha.version>
 
-
-        
-
-        <dependencies>
-
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+    <hutool.version>4.5.0</hutool.version>
+    <auth.version>2.0.0</auth.version>
+    <sms.version>2.0.0</sms.version>
+    <admin.version>1.0.0</admin.version>
+    <boot.version>2.0.0</boot.version>
 
 
+    <jbase.util.version>2.2.4</jbase.util.version>
+    <jbase.spring.version>2.2.12</jbase.spring.version>
+    <jbase.cache.version>2.2.16</jbase.cache.version>
+    <jmeter.version>5.1.1</jmeter.version>
 
-            <!--<dependency>-->
-            <!--<groupId>org.apache.shardingsphere</groupId>-->
-            <!--<artifactId>sharding-jdbc-spring-boot-starter</artifactId>-->
-            <!--<version>${sharding.jdbc.version}</version>-->
-            <!--</dependency>-->
+    <sharding.jdbc.version>4.0.0-RC1</sharding.jdbc.version>
+  </properties>
 
-            <!--个推-->
-            <!--<dependency>-->
-            <!--<groupId>com.gexin.platform</groupId>-->
-            <!--<artifactId>gexin-rp-sdk-http</artifactId>-->
-            <!--<version>4.1.0.5</version>-->
-            <!--</dependency>-->
+  <dependencyManagement>
 
 
-            <!--<dependency>-->
-            <!--<groupId>com.lmax</groupId>-->
-            <!--<artifactId>disruptor</artifactId>-->
-            <!--<version>3.4.2</version>-->
-            <!--</dependency>-->
+    <dependencies>
+
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+        <version>${spring-cloud-alibaba.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
 
 
-            <dependency>
-                <groupId>com.jayqqaa12</groupId>
-                <artifactId>jbase-util</artifactId>
-                <version>${jbase.util.version}</version>
-            </dependency>
+      <dependency>
+        <groupId>org.apache.shardingsphere</groupId>
+        <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+        <version>${sharding.jdbc.version}</version>
+      </dependency>
 
 
-            <dependency>
-                <groupId>com.jayqqaa12</groupId>
-                <artifactId>jbase-spring</artifactId>
-                <version>${jbase.spring.version}</version>
-            </dependency>
-
-           
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatisplus-boot-starter.version}</version>
-            </dependency>
-
-  
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
-            </dependency>
+      <!--<dependency>-->
+      <!--<groupId>com.lmax</groupId>-->
+      <!--<artifactId>disruptor</artifactId>-->
+      <!--<version>3.4.2</version>-->
+      <!--</dependency>-->
 
 
-
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-all</artifactId>
-                <version>${netty.version}</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons-io.version}</version>
-            </dependency>
+      <dependency>
+        <groupId>com.jayqqaa12</groupId>
+        <artifactId>jbase-util</artifactId>
+        <version>${jbase.util.version}</version>
+      </dependency>
 
 
-         
-        </dependencies>
-
-    </dependencyManagement>
-
-
-
-    <build>
-        <finalName>${project.artifactId}</finalName>
-        <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <configuration>
-                    <delimiters>
-                        <delimiter>@</delimiter>
-                    </delimiters>
-                    <useDefaultDelimiters>false</useDefaultDelimiters>
-                    <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>pem</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>pfx</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>crt</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>pk8</nonFilteredFileExtension>
-                        <nonFilteredFileExtension>key</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
-                </configuration>
-            </plugin>
-        </plugins>
-
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
+      <dependency>
+        <groupId>com.jayqqaa12</groupId>
+        <artifactId>jbase-spring</artifactId>
+        <version>${jbase.spring.version}</version>
+      </dependency>
 
 
-            </resource>
-        </resources>
-    </build>
+      <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>${mybatisplus-boot-starter.version}</version>
+      </dependency>
 
 
-    <repositories>
-        <repository>
-            <id>getui-nexus</id>
-            <url>http://mvn.gt.igexin.com/nexus/content/repositories/releases/</url>
-        </repository>
-    </repositories>
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-all</artifactId>
+        <version>${netty.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
+      </dependency>
+
+
+    </dependencies>
+
+  </dependencyManagement>
+
 
 </project>

@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.common.model.entity;
+package com.jayqqaa12.im.business.model.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,7 +8,8 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
+记录离线的指令 （指令可能是删除消息，撤回消息之类的）
  * </p>
  *
  * @author jobob
@@ -17,15 +18,15 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ImGroupMsgDelete implements Serializable {
+public class ImOfflineInstruct implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long gMsgId;
+    private Long id;
 
     private Long uid;
 
-    private Long gid;
+    private String content;
 
 
 }

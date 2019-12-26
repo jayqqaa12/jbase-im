@@ -1,6 +1,6 @@
-package com.jayqqaa12.im.common.model.dto;
+package com.jayqqaa12.im.gateway.protool.model.dto;
 
-import com.jayqqaa12.im.common.model.consts.TcpConstants;
+import com.jayqqaa12.im.gateway.protool.model.TcpConstants;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

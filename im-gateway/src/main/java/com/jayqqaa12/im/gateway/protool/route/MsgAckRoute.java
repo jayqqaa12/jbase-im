@@ -2,11 +2,11 @@ package com.jayqqaa12.im.gateway.protool.route;
 
 import cn.hutool.core.lang.Assert;
 import com.alibaba.fastjson.JSONObject;
-import com.jayqqaa12.im.common.model.tcp.Route;
-import com.jayqqaa12.im.common.model.tcp.Router;
-import com.jayqqaa12.im.common.model.tcp.TcpContext;
+import com.jayqqaa12.im.gateway.protool.model.tcp.Route;
+import com.jayqqaa12.im.gateway.protool.model.tcp.Router;
+import com.jayqqaa12.im.gateway.protool.model.tcp.TcpContext;
 import com.jayqqaa12.im.common.model.consts.Req;
-import com.jayqqaa12.im.common.model.vo.TcpReqVO;
+import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
 import com.jayqqaa12.im.gateway.support.SendHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 

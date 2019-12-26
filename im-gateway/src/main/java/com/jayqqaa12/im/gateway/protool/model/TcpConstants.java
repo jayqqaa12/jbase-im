@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.common.model.consts;
+package com.jayqqaa12.im.gateway.protool.model;
 
 public class TcpConstants {
 

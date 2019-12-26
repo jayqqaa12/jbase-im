@@ -1,5 +1,6 @@
-package com.jayqqaa12.im.common.model.entity;
+package com.jayqqaa12.im.business.model.entity;
 
+import com.jayqqaa12.im.business.model.consts.MsgType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -32,7 +33,7 @@ public class ImMsg implements Serializable {
     /**
      * 消息类型 0 文字 1.表情2图片3,语音4视频 5 json
      */
-    private Integer type;
+    private MsgType type;
 
     /**
      * 是否撤回

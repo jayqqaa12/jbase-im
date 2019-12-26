@@ -1,7 +1,7 @@
 package com.jayqqaa12.im.business.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.jayqqaa12.im.common.model.entity.ImMsg;
+import com.jayqqaa12.im.business.model.entity.ImMsg;
 
 /**
  * <p>

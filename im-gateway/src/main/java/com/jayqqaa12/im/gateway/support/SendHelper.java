@@ -2,9 +2,9 @@ package com.jayqqaa12.im.gateway.support;
 
 import cn.hutool.core.lang.Assert;
 import com.google.common.collect.Maps;
-import com.jayqqaa12.im.common.model.tcp.RespChannel;
-import com.jayqqaa12.im.common.model.dto.RetryDTO;
-import com.jayqqaa12.im.common.model.vo.TcpRespVO;
+import com.jayqqaa12.im.gateway.protool.model.tcp.RespChannel;
+import com.jayqqaa12.im.gateway.protool.model.dto.RetryDTO;
+import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
 import com.jayqqaa12.jbase.util.Executors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

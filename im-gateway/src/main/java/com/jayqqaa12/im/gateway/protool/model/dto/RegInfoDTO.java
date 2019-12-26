@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.common.model.dto;
+package com.jayqqaa12.im.gateway.protool.model.dto;
 
 
 import lombok.Data;
@@ -16,11 +16,11 @@ public class RegInfoDTO {
 
     /**
      * 平台
-     * ios android h5 
+     * ios android h5
      */
     String platform;
 
-    
+
     transient boolean isLogin;
 
 

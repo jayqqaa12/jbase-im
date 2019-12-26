@@ -1,7 +1,7 @@
 package com.jayqqaa12.im.gateway.support;
 
-import com.jayqqaa12.im.common.model.consts.TcpConstants;
-import com.jayqqaa12.im.common.model.vo.TcpRespVO;
+import com.jayqqaa12.im.gateway.protool.model.TcpConstants;
+import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
 import org.springframework.stereotype.Component;
 
 /**

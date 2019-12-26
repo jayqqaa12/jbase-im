@@ -1,14 +1,16 @@
-package com.jayqqaa12.im.common.model.entity;
+package com.jayqqaa12.im.business.model.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ *
+群组表
  * </p>
  *
  * @author jobob
@@ -17,19 +19,19 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ImGroupMsgRead implements Serializable {
+public class ImGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long gMsgId;
+    private Long id;
 
-    private Long sendUid;
+    private String name;
 
-    private Long recvUid;
+    private Long createUid;
 
-    private Long gid;
+    private LocalDateTime createTime;
 
-    private Boolean read;
+    private LocalDateTime updateTime;
 
 
 }

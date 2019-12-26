@@ -1,6 +1,6 @@
 package com.jayqqaa12.im.business.service;
 
-import com.jayqqaa12.im.common.model.entity.ImMsg;
+import com.jayqqaa12.im.business.model.entity.ImMsg;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

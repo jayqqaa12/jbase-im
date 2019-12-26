@@ -1,6 +1,6 @@
-package com.jayqqaa12.im.common.model.tcp;
+package com.jayqqaa12.im.gateway.protool.model.tcp;
 
-import com.jayqqaa12.im.common.model.vo.TcpReqVO;
+import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
 
 @FunctionalInterface
 public interface Router<T> {

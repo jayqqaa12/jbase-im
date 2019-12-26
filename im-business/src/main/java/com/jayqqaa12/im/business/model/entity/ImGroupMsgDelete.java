@@ -1,16 +1,15 @@
-package com.jayqqaa12.im.common.model.entity;
+package com.jayqqaa12.im.business.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
-群组表
+ *
  * </p>
  *
  * @author jobob
@@ -19,19 +18,16 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ImGroup implements Serializable {
+public class ImGroupMsgDelete implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    @TableId
+    private Long gMsgId;
 
-    private String name;
+    private Long uid;
 
-    private Long createUid;
-
-    private LocalDateTime createTime;
-
-    private LocalDateTime updateTime;
+    private Long gid;
 
 
 }

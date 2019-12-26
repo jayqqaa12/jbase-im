@@ -1,11 +1,11 @@
 package com.jayqqaa12.im.business.mapper;
 
-import com.jayqqaa12.im.common.model.entity.ImGroup;
+import com.jayqqaa12.im.business.model.entity.ImGroup;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- * 
+ *
 群组表 Mapper 接口
  * </p>
  *

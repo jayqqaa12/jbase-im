@@ -1,8 +1,8 @@
-package com.jayqqaa12.im.common.model.vo;
+package com.jayqqaa12.im.gateway.protool.model.vo;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.jayqqaa12.im.common.model.consts.Resp;
-import com.jayqqaa12.im.common.model.dto.RetryDTO;
+import com.jayqqaa12.im.gateway.protool.model.dto.RetryDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

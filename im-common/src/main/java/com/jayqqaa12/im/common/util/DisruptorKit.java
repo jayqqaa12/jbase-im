@@ -3,7 +3,7 @@
 //import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 //import com.google.gateway.collect.Maps;
 //import com.google.gateway.collect.Queues;
-//import com.jayqqaa12.im.common.model.vo.TcpRespVO;
+//import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
 //import com.lmax.disruptor.BlockingWaitStrategy;
 //import com.lmax.disruptor.WorkHandler;
 //import com.lmax.disruptor.dsl.Disruptor;

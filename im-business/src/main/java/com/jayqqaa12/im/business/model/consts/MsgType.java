@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.common.model.consts;
+package com.jayqqaa12.im.business.model.consts;
 
 /**
  * @author: 12

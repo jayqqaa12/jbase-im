@@ -1,7 +1,7 @@
 package com.jayqqaa12.im.gateway.protool.tcp;
 
 import com.alibaba.fastjson.JSON;
-import com.jayqqaa12.im.common.model.vo.TcpRespVO;
+import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
 import com.jayqqaa12.im.gateway.protool.encode.JSONEncoder;
 import com.jayqqaa12.im.gateway.protool.handler.ServerHandler;
 import com.jayqqaa12.jbase.tcp.netty.NettyHeartHandler;
@@ -51,10 +51,10 @@ public class SocketServer extends NettyServer {
         pipeline.addLast(eventExecutors, serverHandler);
     }
 
-                        
+
     @Override
     protected void config(ServerBootstrap bootstrap) {
-        
+
         bootstrap.childOption(ChannelOption.TCP_NODELAY, true)
                 .option(ChannelOption.SO_REUSEADDR, true)
                 .option(ChannelOption.SO_BACKLOG, 1024*10)

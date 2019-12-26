@@ -1,5 +1,6 @@
-package com.jayqqaa12.im.common.model.entity;
+package com.jayqqaa12.im.business.model.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -8,8 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
-记录离线的指令 （指令可能是删除消息，撤回消息之类的）
+ *
  * </p>
  *
  * @author jobob
@@ -18,15 +18,20 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ImOfflineInstruct implements Serializable {
+public class ImGroupMsgRead implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    @TableId
+    private Long gMsgId;
 
-    private Long uid;
+    private Long sendUid;
 
-    private String content;
+    private Long recvUid;
+
+    private Long gid;
+
+    private Boolean read;
 
 
 }

@@ -1,7 +1,7 @@
-package com.jayqqaa12.im.common.model.tcp;
+package com.jayqqaa12.im.gateway.protool.model.tcp;
 
 import com.alibaba.fastjson.JSON;
-import com.jayqqaa12.im.common.model.vo.TcpRespVO;
+import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,16 +1,15 @@
-package com.jayqqaa12.im.common.model.entity;
+package com.jayqqaa12.im.business.model.entity;
 
+import com.jayqqaa12.im.business.model.consts.MsgIndexType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
-群用户表 并且存了 最后拉取群消息的 msg id  用来拉取离线消息
+ * 单聊的 消息索引 （新增一条消息 存2条  ）
  * </p>
  *
  * @author jobob
@@ -19,17 +18,21 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ImGroupUser implements Serializable {
+public class ImMsgIndex implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
 
+    private Long msgId;
     private Long uid;
 
-    private Long gid;
+    private Long otherUid;
 
-    private LocalDateTime createTime;
+    /**
+     * 0 send 1 recv
+     */
+    private MsgIndexType type;
 
 
 }

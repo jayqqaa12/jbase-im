@@ -1,10 +1,10 @@
 package com.jayqqaa12.im.gateway.protool.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.jayqqaa12.im.common.model.tcp.RespChannel;
-import com.jayqqaa12.im.common.model.tcp.TcpContext;
+import com.jayqqaa12.im.gateway.protool.model.tcp.RespChannel;
+import com.jayqqaa12.im.gateway.protool.model.tcp.TcpContext;
 import com.jayqqaa12.im.common.model.consts.Req;
-import com.jayqqaa12.im.common.model.vo.TcpReqVO;
+import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -44,7 +44,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
         }
     }
 
-    
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
         LOG.info("client connect to server {},{}", ctx.channel().remoteAddress(), ctx.channel());
@@ -77,7 +77,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<String> {
     private void discardChannel(Channel ch) throws Exception {
 
         TcpContext context = getTcpContent(ch);
-        
+
         RouterChain.exec(new TcpReqVO().setCode(Req.UNREGISTER), context);
         LOG.info("user {} discardChannel {} ", context.getUserOrDevice(), ch);
 

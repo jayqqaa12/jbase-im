@@ -1,11 +1,11 @@
 package com.jayqqaa12.im.business.service;
 
-import com.jayqqaa12.im.common.model.entity.ImGroup;
+import com.jayqqaa12.im.business.model.entity.ImGroup;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- * 
+ *
 群组表 服务类
  * </p>
  *

@@ -1,7 +1,7 @@
 //package com.jayqqaa12.im.support;
 //
 //import com.jayqqaa12.im.common.model.PushModel;
-//import com.jayqqaa12.im.common.model.vo.TcpRespVO;
+//import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
 //import com.jayqqaa12.im.util.PushUtils;
 //import org.springframework.beans.factory.annotation.Value;
 //import org.springframework.stereotype.Component;

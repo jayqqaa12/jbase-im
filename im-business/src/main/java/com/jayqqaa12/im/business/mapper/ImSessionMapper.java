@@ -1,11 +1,11 @@
 package com.jayqqaa12.im.business.mapper;
 
-import com.jayqqaa12.im.common.model.entity.ImSession;
+import com.jayqqaa12.im.business.model.entity.ImSession;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- * 
+ *
 最新的会话的 索引 只记录最新一条消息 Mapper 接口
  * </p>
  *

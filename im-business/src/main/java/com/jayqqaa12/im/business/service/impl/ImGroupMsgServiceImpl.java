@@ -1,6 +1,6 @@
 package com.jayqqaa12.im.business.service.impl;
 
-import com.jayqqaa12.im.common.model.entity.ImGroupMsg;
+import com.jayqqaa12.im.business.model.entity.ImGroupMsg;
 import com.jayqqaa12.im.business.mapper.ImGroupMsgMapper;
 import com.jayqqaa12.im.business.service.IGroupMsgService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
