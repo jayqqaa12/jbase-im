@@ -20,7 +20,7 @@ public class TcpContext implements Cloneable {
     private RespChannel respChannel;
 
 
-    private Integer userId;
+    private Long userId;
 
     private String device;
 
@@ -31,7 +31,7 @@ public class TcpContext implements Cloneable {
 
     public String getUserOrDevice() {
 
-        Integer id = getUserId();
+      Long id = getUserId();
         return id != null ? id + "" : getDevice();
     }
 

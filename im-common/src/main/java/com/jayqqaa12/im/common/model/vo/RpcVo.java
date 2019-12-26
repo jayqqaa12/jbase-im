@@ -12,12 +12,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class RpcVo {
 
-  private boolean login;
+  //device 和uid 二选一
 
   private Integer userId;
   private String device;
+
   private String uuid;   // 请求的唯一标示 请保证重发的消息uuid相同
   private Integer code; //请求码
+
   private Long timestamp;
   private String version;//指令的版本号 为以后做兼容
 

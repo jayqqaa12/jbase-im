@@ -8,7 +8,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class RegInfoDTO {
 
-    Integer userId;
+    Long userId;
+
 
     String token;
 
@@ -25,7 +26,7 @@ public class RegInfoDTO {
 
 
     public String getUserOrDevice() {
-        Integer id = getUserId();
+        Long id = getUserId();
         return id != null ? id + "" : getDevice();
     }
 

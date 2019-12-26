@@ -1,14 +1,15 @@
 package com.jayqqaa12.im.gateway.protool.route;
 
 import cn.hutool.core.lang.Assert;
-import com.jayqqaa12.im.gateway.protool.model.tcp.Route;
-import com.jayqqaa12.im.gateway.protool.model.tcp.Router;
-import com.jayqqaa12.im.gateway.protool.model.tcp.TcpContext;
 import com.jayqqaa12.im.common.model.consts.Req;
 import com.jayqqaa12.im.common.model.consts.Resp;
 import com.jayqqaa12.im.gateway.protool.model.dto.RegInfoDTO;
+import com.jayqqaa12.im.gateway.protool.model.tcp.Route;
+import com.jayqqaa12.im.gateway.protool.model.tcp.Router;
+import com.jayqqaa12.im.gateway.protool.model.tcp.TcpContext;
 import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
 import com.jayqqaa12.im.gateway.support.RegHelper;
+import com.jayqqaa12.jbase.spring.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -21,41 +22,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Route(req = Req.REGISTER, checkLogin = false)
 public class RegRoute implements Router<RegInfoDTO> {
 
-    @Autowired
-    RegHelper regHelper;
-
-//    @Autowired
-//    RedisTemplate redisTemplate;
+  @Autowired
+  RegHelper regHelper;
 
 
-    @Override
-    public void handle(TcpContext context, TcpReqVO req, RegInfoDTO info) {
-        if (context.isLogin()) return;
+  @Override
+  public void handle(TcpContext context, TcpReqVO req, RegInfoDTO info) {
+    if (context.isLogin()) return;
 
-        Assert.isTrue(info.getDevice() != null || info.getUserId() != null, "userid or device can't null");
-        //  验证token
-        checkToken(info);
+    //todo 为方便测试直接用客户端传过来的userid 实践使用中应该从token中获取
+//    info.setUserId(null);
 
-        regHelper.register(info, context.getRespChannel());
-        context.setUserId(info.getUserId());
-        context.setDevice(info.getDevice());
-        context.setLogin(true);
+    Assert.isTrue(info.getDevice() != null || info.getToken() != null, "token or device can't null");
+    //  验证token
+    checkToken(info);
 
-        context.response(req, Resp.OK);
+    context.setUserId(info.getUserId());
+    context.setDevice(info.getDevice());
 
-    }
+    regHelper.register(info, context.getRespChannel());
 
-    private void checkToken(RegInfoDTO info) {
-        String token = info.getToken();
-        if (token == null) return;
+    context.setLogin(true);
+    context.response(req, Resp.OK);
 
+  }
 
-//        Object redisToken = redisTemplate.opsForValue().get(key);
-//        if (redisToken != null && token.equals(redisToken.toString())) {
-//            info.setLogin(true);
-//        } else throw new BusinessException(TOKEN_ERROR, "TOKEN异常", null);
+  private void checkToken(RegInfoDTO info) {
 
-    }
+    if(info.getToken()==null)return;
+
+    //todo 接入其他系统需要 重写token 验证逻辑 获取uid
+
+    throw new BusinessException(Resp.TOKEN_ERROR, "TOKEN异常", null);
+
+  }
 
 
 }

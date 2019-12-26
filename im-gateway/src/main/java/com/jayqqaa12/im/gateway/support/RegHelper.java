@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class RegHelper {
 
     private Multimap<String, ServerEntry> deviceMap = LinkedListMultimap.create();
-    private Multimap<Integer, ServerEntry> userIdsMap = LinkedListMultimap.create();
+    private Multimap<Long, ServerEntry> userIdsMap = LinkedListMultimap.create();
 
     private ConcurrentHashMap<RespChannel, ServerEntry> channelMapUserCache = new ConcurrentHashMap<>();
 
