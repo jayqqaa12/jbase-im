@@ -60,7 +60,7 @@ public class RegHelper {
 
         List<RespChannel> list = getRespChannel(key);
         try {
-            if (list.isEmpty()) return getRespChannel(Integer.parseInt(key));
+            if (list.isEmpty()) return getRespChannel(Long.parseLong(key));
         } catch (Exception e) {
         }
 
@@ -79,7 +79,7 @@ public class RegHelper {
     }
 
 
-    public List<RespChannel> getRespChannel(Integer uid) {
+    public List<RespChannel> getRespChannel(Long uid) {
 
         Collection<ServerEntry> result = userIdsMap.get(uid);
 

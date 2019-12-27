@@ -22,7 +22,7 @@
         </dependency>
 
 
-        
+
 
         <dependency>
             <groupId>com.jayqqaa12</groupId>
@@ -35,16 +35,10 @@
         </dependency>
 
 
+
     </dependencies>
 
 
 
-
-    <repositories>
-        <repository>
-            <id>getui-nexus</id>
-            <url>http://mvn.gt.igexin.com/nexus/content/repositories/releases/</url>
-        </repository>
-    </repositories>
 
 </project>

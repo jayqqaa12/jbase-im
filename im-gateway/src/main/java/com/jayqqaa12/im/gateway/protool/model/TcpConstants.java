@@ -9,7 +9,6 @@ public class TcpConstants {
 
     public static final int MAX_RECALL_TIMEOUT=3;
 
-    public static final String MQ_FORWARD="mq_tcp_forward_";
 
 
     public static final String DISRUPTOR_RETRY ="retry";

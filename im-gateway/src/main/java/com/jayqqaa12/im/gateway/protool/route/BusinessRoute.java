@@ -23,7 +23,7 @@ public class BusinessRoute implements Router<JSONObject> {
 
 
   @Override
-  public void handle(TcpContext context, TcpReqVO req, JSONObject data) {
+  public void handle(TcpContext context, TcpReqVO req, JSONObject data) throws Exception {
 
     RpcVo rpcVo = new RpcVo();
     BeanUtils.copyProperties(context, rpcVo);

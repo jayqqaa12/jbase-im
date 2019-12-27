@@ -1,6 +1,6 @@
 package com.jayqqaa12.im.gateway.support;
 
-import com.jayqqaa12.im.gateway.protool.model.TcpConstants;
+import com.jayqqaa12.im.common.model.consts.MqConstants;
 import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class ForwardHelper {
     public void forward(String dest, TcpRespVO resp) {
 
 
-        String queue = TcpConstants.MQ_FORWARD+ dest;
+        String queue = MqConstants.MQ_FORWARD+ dest;
 
 //        kafkaTemplate.sendMsg(queue, resp);
 

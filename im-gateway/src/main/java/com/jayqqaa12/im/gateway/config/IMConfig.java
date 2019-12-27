@@ -42,7 +42,7 @@ public class IMConfig {
         JSON.DEFAULT_GENERATE_FEATURE = SerializerFeature.config(JSON.DEFAULT_GENERATE_FEATURE, SerializerFeature.WriteEnumUsingName, false);
 
 
-        RouterChain.init("com.jayqqaa12.im.gateway", context);
+        RouterChain.init(  context);
 
     }
 

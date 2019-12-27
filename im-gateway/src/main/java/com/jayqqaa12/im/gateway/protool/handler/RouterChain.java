@@ -1,19 +1,18 @@
 package com.jayqqaa12.im.gateway.protool.handler;
 
-import cn.hutool.core.util.ClassUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.jayqqaa12.im.gateway.protool.model.tcp.Route;
-import com.jayqqaa12.im.gateway.protool.model.tcp.Router;
-import com.jayqqaa12.im.gateway.protool.model.tcp.TcpContext;
 import com.jayqqaa12.im.common.model.consts.Req;
 import com.jayqqaa12.im.common.model.consts.Resp;
 import com.jayqqaa12.im.common.model.consts.VersionEnum;
+import com.jayqqaa12.im.common.util.ValidatorUtil;
+import com.jayqqaa12.im.gateway.protool.model.tcp.Route;
+import com.jayqqaa12.im.gateway.protool.model.tcp.Router;
+import com.jayqqaa12.im.gateway.protool.model.tcp.TcpContext;
 import com.jayqqaa12.im.gateway.protool.model.vo.RouterVo;
 import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
-import com.jayqqaa12.im.common.util.ValidatorUtil;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
@@ -29,16 +28,15 @@ public class RouterChain {
   private static Multimap<Integer, RouterVo> routerMap = ArrayListMultimap.create();
 
 
-  public static void init(String packname, ApplicationContext context) {
+  public static void init(ApplicationContext context) {
     // load router
-    for (Class clazz : ClassUtil.scanPackageBySuper(packname, Router.class)) {
-      Route route = (Route) clazz.getAnnotation(Route.class);
+    for (String beanName : context.getBeanNamesForAnnotation(Route.class)) {
+      Router bean = (Router) context.getBean(beanName);
+
+      Route route = bean.getClass().getAnnotation(Route.class);
       if (route == null) throw new RuntimeException("Router must use @Route annotation");
 
-      String name = clazz.getSimpleName();
-      String beanName = name.substring(0, 1).toLowerCase() + name.substring(1, name.length());
-
-      routerMap.put(route.req(), new RouterVo(context.getBean(beanName, Router.class), route));
+      routerMap.put(route.req(), new RouterVo(bean, route));
 
     }
   }
