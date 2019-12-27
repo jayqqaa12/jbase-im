@@ -15,7 +15,6 @@ import com.jayqqaa12.im.common.model.dto.RpcDTO;
 import com.jayqqaa12.im.common.model.vo.TcpRespVO;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -57,25 +56,25 @@ public class RecallMsgHandler implements IHandler<RecallMsgDTO> {
 
       msgService.updateById(new ImMsg().setId(msg.getId()).setRecall(true));
 
-      //存离线指令
-
-      offlineInstructService.save(new ImOfflineInstruct()
-        .setUid(msg.getRecvUid()).
-          setContent(TcpRespVO.response(req.getCode(), data, msg.getRecvUid().toString())));
-
-      offlineInstructService.save(new ImOfflineInstruct()
-        .setUid(req.getUserId()).
-          setContent(TcpRespVO.response(req.getCode(), data, req.getUserId().toString())));
-
-
       //给消息的接受者发撤回
-      sendClient.send(msg.getRecvUid().toString(), req.getCode(), data);
+      send(req.getCode(), msg.getRecvUid(), data);
       //给消息的发送者也要发，因为可能是多平台
-      sendClient.send(req.getUserId().toString(), req.getCode(), data);
-
-
+      send(req.getCode(), req.getUserId(), data);
     }
 
     return data.getMsgId();
+  }
+
+
+  private void send(int code, Long uid, RecallMsgDTO data) {
+
+    //存离线指令 给其他没有上线的客户端使用
+    ImOfflineInstruct offlineInstruct = new ImOfflineInstruct()
+      .setUid(uid).
+        setContent(TcpRespVO.response(code, data, uid.toString()));
+
+    offlineInstructService.save(offlineInstruct);
+
+    sendClient.send(uid.toString(), offlineInstruct.getContent().setRespId(offlineInstruct.getId()));
   }
 }

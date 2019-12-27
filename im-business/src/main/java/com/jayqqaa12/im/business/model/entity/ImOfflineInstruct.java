@@ -1,5 +1,6 @@
 package com.jayqqaa12.im.business.model.entity;
 
+import com.jayqqaa12.im.common.model.vo.TcpRespVO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -26,7 +27,7 @@ public class ImOfflineInstruct implements Serializable {
 
     private Long uid;
 
-    private Object content;
+    private TcpRespVO content;
 
 
 }

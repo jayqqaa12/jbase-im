@@ -42,9 +42,20 @@ public class SendClient {
       //指定节点 发送 MQ消息
       kafkaTemplate.send(MqConstants.MQ_CLIENT + node, TcpRespVO.response(code,data,dest));
     }
-
     return !list.isEmpty();
+  }
 
+
+  public boolean send(String  dest, TcpRespVO respVO) {
+    //通过dest 查询到 当前用户在那个gateway 节点 因为是多平台可能有多个节点都在
+
+    List<String > list=getOnlineDest(dest);
+
+    for (String node : list) {
+      //指定节点 发送 MQ消息
+      kafkaTemplate.send(MqConstants.MQ_CLIENT + node,respVO);
+    }
+    return !list.isEmpty();
   }
 
   public List<String> getOnlineDest(String dest) {

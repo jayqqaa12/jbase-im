@@ -60,7 +60,7 @@ public class RouterChain {
    * @param req
    * @param context
    */
-  static void exec(TcpReqVO req, TcpContext context) throws Exception {
+  public static void exec(TcpReqVO req, TcpContext context) throws Exception {
     RouterVo router = getRouter(req);
     if (router == null) context.error(Resp.CMD_ERROR, "指令不存在");
     else {

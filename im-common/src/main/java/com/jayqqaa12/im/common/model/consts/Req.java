@@ -15,7 +15,7 @@ public interface Req {
 
   int BUSINESS=1100;
 
-  int AUTO_GET_OFFLINE=1101;//上线的时候拉取离线消息
+  int BUSINESS_EVENT_LOGIN =1101;//上线事件
 
   //通用消息  (1101-1200】
 

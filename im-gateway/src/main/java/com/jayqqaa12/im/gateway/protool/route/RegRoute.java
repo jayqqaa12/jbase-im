@@ -28,7 +28,7 @@ public class RegRoute implements Router<RegInfoDTO> {
 
 
   @Override
-  public void handle(TcpContext context, TcpReqVO req, RegInfoDTO info) {
+  public void handle(TcpContext context, TcpReqVO req, RegInfoDTO info) throws Exception {
     if (context.isLogin()) return;
 
     //todo 为方便测试直接用客户端传过来的userid 实践使用中应该从token中获取 取消下面注释
@@ -46,8 +46,8 @@ public class RegRoute implements Router<RegInfoDTO> {
     context.setLogin(true);
     context.response(req, Resp.OK);
 
-
-
+    //登录成功 自动触发登录事件
+    RouterChain.exec(TcpReqVO.req(Req.BUSINESS_EVENT_LOGIN,null),context);
   }
 
   private void checkToken(RegInfoDTO info) {
