@@ -7,12 +7,14 @@ import com.jayqqaa12.im.gateway.protool.base.Route;
 import com.jayqqaa12.im.gateway.protool.base.Router;
 import com.jayqqaa12.im.gateway.protool.base.TcpContext;
 import com.jayqqaa12.im.common.model.consts.Req;
-import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
+import com.jayqqaa12.im.common.model.vo.TcpReqVO;
 import com.jayqqaa12.im.gateway.support.SendHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
+ *
  * 收到ack消息 改变消息状态
+ *
  * <p>
  * 批量操作
  *
@@ -27,13 +29,13 @@ public class MsgAckRoute implements Router<JSONObject> {
 
   @Override
   public void handle(TcpContext context, TcpReqVO req, JSONObject data) throws Exception {
-    JSONArray msgIds = data.getJSONArray("msgIds");
+    JSONArray respIds = data.getJSONArray("respIds");
 
-    Assert.notNull(msgIds, "msg id can't null");
+    Assert.notNull(respIds, "resp id can't null");
 
     //停止重发
-    for (int i = 0; i < msgIds.size(); i++) {
-      sendHelper.removeRetryMsg(msgIds.getLong(i));
+    for (int i = 0; i < respIds.size(); i++) {
+      sendHelper.removeRetryMsg(respIds.getLong(i));
     }
 
 

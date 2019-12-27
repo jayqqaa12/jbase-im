@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.common.model.vo;
+package com.jayqqaa12.im.common.model.dto;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;

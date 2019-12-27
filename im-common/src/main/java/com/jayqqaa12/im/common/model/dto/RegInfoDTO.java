@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.gateway.protool.model.dto;
+package com.jayqqaa12.im.common.model.dto;
 
 
 import lombok.Data;

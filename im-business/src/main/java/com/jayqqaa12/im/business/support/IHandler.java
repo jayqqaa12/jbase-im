@@ -1,6 +1,6 @@
 package com.jayqqaa12.im.business.support;
 
-import com.jayqqaa12.im.common.model.vo.RpcDTO;
+import com.jayqqaa12.im.common.model.dto.RpcDTO;
 
 /**
  * @author: 12

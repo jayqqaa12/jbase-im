@@ -1,7 +1,7 @@
 package com.jayqqaa12.im.gateway.protool.tcp;
 
 import com.alibaba.fastjson.JSON;
-import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
+import com.jayqqaa12.im.common.model.vo.TcpRespVO;
 import com.jayqqaa12.im.gateway.protool.encode.JSONEncoder;
 import com.jayqqaa12.im.gateway.protool.base.ServerHandler;
 import com.jayqqaa12.jbase.tcp.netty.NettyHeartHandler;

@@ -1,8 +1,7 @@
-package com.jayqqaa12.im.gateway.protool.model.vo;
+package com.jayqqaa12.im.common.model.vo;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.jayqqaa12.im.common.model.consts.Resp;
-import com.jayqqaa12.im.gateway.protool.model.dto.RetryDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,12 +28,12 @@ public class TcpRespVO<T> implements Delayed {
   private String nodeId;
 
   //唯一标识 用来防止重发的重复
-  private Long msgId;
+  private Long respId;
 
   private String dest;
 
 
-  private transient RetryDTO retry;
+  private transient RetryVo retry;
 
 
   public static TcpRespVO heart() {
@@ -42,19 +41,19 @@ public class TcpRespVO<T> implements Delayed {
   }
 
 
-  public static TcpRespVO<Object> response(Integer code, Object data, String dest, Long msgId) {
-    return response(code, null, data, dest, msgId);
-  }
+//  public static TcpRespVO<Object> response(Integer code, Object data, String dest, Long msgId) {
+//    return response(code, null, data, dest, msgId);
+//  }
 
 
   public static TcpRespVO<Object> response(Integer code, Object data, String dest) {
     return response(code, null, data, dest, IdWorker.getId());
   }
 
-  public static TcpRespVO<Object> response(Integer code, String msg, Object data, String dest, Long msgId) {
+  public static TcpRespVO<Object> response(Integer code, String msg, Object data, String dest, Long respId) {
     return TcpRespVO.builder()
       .code(code)
-      .msgId(msgId)
+      .respId(respId)
       .message(msg)
       .timestamp(System.currentTimeMillis())
       .data(data)

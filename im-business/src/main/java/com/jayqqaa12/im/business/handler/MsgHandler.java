@@ -9,7 +9,9 @@ import com.jayqqaa12.im.business.support.Handler;
 import com.jayqqaa12.im.business.support.IHandler;
 import com.jayqqaa12.im.common.client.SendClient;
 import com.jayqqaa12.im.common.model.consts.Req;
-import com.jayqqaa12.im.common.model.vo.RpcDTO;
+import com.jayqqaa12.im.common.model.consts.Resp;
+import com.jayqqaa12.im.common.model.dto.RpcDTO;
+import com.jayqqaa12.jbase.spring.exception.BusinessException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -41,14 +43,18 @@ public class MsgHandler implements IHandler<SendMsgDTO> {
       msgService.saveMsg(msg);
 
       // 推送给接受用户
-      sendClient.send(data.getRecvUid().toString(),msg);
+      sendClient.send(data.getRecvUid().toString(), req.getCode(),msg);
+
+      // 推送给发送用户 因为可能存在多个平台
+      sendClient.send(req.getUserId().toString(), req.getCode(),msg);
+
 
       return msg.getId();
     }
     else{
-      //群聊
+      //todo 群聊
+      throw new BusinessException(Resp.CMD_ERROR);
 
-      return null;
     }
 
 

@@ -7,10 +7,11 @@ import com.google.common.collect.Multimap;
 import com.jayqqaa12.im.common.model.consts.Req;
 import com.jayqqaa12.im.common.model.consts.Resp;
 import com.jayqqaa12.im.common.model.consts.VersionEnum;
+import com.jayqqaa12.im.common.model.vo.TcpReqVO;
 import com.jayqqaa12.im.common.util.ValidatorKit;
-import com.jayqqaa12.im.gateway.protool.model.vo.RouterVo;
-import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.Assert;
@@ -33,7 +34,7 @@ public class RouterChain {
       Route route = bean.getClass().getAnnotation(Route.class);
       if (route == null) throw new RuntimeException("Router must use @Route annotation");
 
-      routerMap.put(route.req(), new RouterVo(bean, route));
+      routerMap.put(route.req(), new  RouterVo(bean, route));
 
     }
   }
@@ -144,6 +145,16 @@ public class RouterChain {
     } else {
       context.error("unkonwn error " + throwable.getMessage());
     }
+  }
+
+
+  @Data
+  @AllArgsConstructor
+  private static class RouterVo {
+    Router router;
+    Route route;
+
+
   }
 
 

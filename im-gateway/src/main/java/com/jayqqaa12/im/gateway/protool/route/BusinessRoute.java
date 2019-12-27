@@ -3,11 +3,11 @@ package com.jayqqaa12.im.gateway.protool.route;
 import cn.hutool.json.JSONObject;
 import com.jayqqaa12.im.business.support.BusinessDispatcher;
 import com.jayqqaa12.im.common.model.consts.Req;
-import com.jayqqaa12.im.common.model.vo.RpcDTO;
+import com.jayqqaa12.im.common.model.dto.RpcDTO;
 import com.jayqqaa12.im.gateway.protool.base.Route;
 import com.jayqqaa12.im.gateway.protool.base.Router;
 import com.jayqqaa12.im.gateway.protool.base.TcpContext;
-import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
+import com.jayqqaa12.im.common.model.vo.TcpReqVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 

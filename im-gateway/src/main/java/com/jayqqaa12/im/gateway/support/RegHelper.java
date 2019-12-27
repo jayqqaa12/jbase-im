@@ -5,7 +5,7 @@ import com.google.common.collect.Multimap;
 import com.jayqqaa12.im.common.model.consts.CacheConstants;
 import com.jayqqaa12.im.common.util.NodeKit;
 import com.jayqqaa12.im.gateway.protool.base.RespChannel;
-import com.jayqqaa12.im.gateway.protool.model.dto.RegInfoDTO;
+import com.jayqqaa12.im.common.model.dto.RegInfoDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

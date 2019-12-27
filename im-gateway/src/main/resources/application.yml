@@ -1,7 +1,7 @@
- 
+
 spring:
   application:
-    name: im
+    name: im-gateway
   profiles:
     active: dev
   main:
@@ -44,17 +44,17 @@ spring.kafka.consumer.auto-commit-interval: 100
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
- 
+
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
- 
+
 
 config:
   apidoc: false
   j2cache:
     enabled: false
- 
+
 
 management:
   endpoints:
@@ -68,7 +68,7 @@ management:
 
 
 
- 
+
 
 
 

@@ -2,6 +2,7 @@ package com.jayqqaa12.im.common.client;
 
 import com.jayqqaa12.im.common.model.consts.CacheConstants;
 import com.jayqqaa12.im.common.model.consts.MqConstants;
+import com.jayqqaa12.im.common.model.vo.TcpRespVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -11,6 +12,8 @@ import java.util.List;
 
 /**
  * 业务层可以通过这个client 来主动发送消息给指定的用户
+ *
+ * 可靠性通过MQ保证
  *
  * @author: 12
  * @create: 2019-12-26 15:16
@@ -28,15 +31,19 @@ public class SendClient {
    *  发送消息给目标用户
    *
    * 通过MQ发送给 网关节点
+   * @return
    */
-  public void send(String  dest, Object data) {
-
+  public boolean send(String  dest, int code, Object data) {
     //通过dest 查询到 当前用户在那个gateway 节点 因为是多平台可能有多个节点都在
-    for (String node : getOnlineDest(dest)) {
+
+    List<String > list=getOnlineDest(dest);
+
+    for (String node : list) {
       //指定节点 发送 MQ消息
-      kafkaTemplate.send(MqConstants.MQ_CLIENT + node, data);
+      kafkaTemplate.send(MqConstants.MQ_CLIENT + node, TcpRespVO.response(code,data,dest));
     }
 
+    return !list.isEmpty();
 
   }
 

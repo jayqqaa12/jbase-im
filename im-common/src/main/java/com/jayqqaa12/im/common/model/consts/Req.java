@@ -15,6 +15,7 @@ public interface Req {
 
   int BUSINESS=1100;
 
+  int AUTO_GET_OFFLINE=1101;//上线的时候拉取离线消息
 
   //通用消息  (1101-1200】
 
@@ -27,6 +28,7 @@ public interface Req {
   int RECALL_MSG = 1107;    // 撤回消息
 
   int SESSION_LIST=1108;// 最近会话列表
+
 
 
   // 单聊 （1201-1300】

@@ -1,6 +1,6 @@
-package com.jayqqaa12.im.gateway.protool.model.dto;
+package com.jayqqaa12.im.common.model.vo;
 
-import com.jayqqaa12.im.gateway.protool.model.TcpConstants;
+import com.jayqqaa12.im.common.model.consts.TcpConstants;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
  **/
 @Data
 @Accessors(chain = true)
-public class RetryDTO  {
+public class RetryVo {
 
     private int retryTimes = 0;
 

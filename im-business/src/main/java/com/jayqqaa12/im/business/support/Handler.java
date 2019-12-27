@@ -16,7 +16,8 @@ import java.lang.annotation.*;
 @Component
 public @interface Handler {
 
-  int req();
+
+  int req()  ;
 
   VersionEnum max() default VersionEnum.V_9_9_9_9;
 

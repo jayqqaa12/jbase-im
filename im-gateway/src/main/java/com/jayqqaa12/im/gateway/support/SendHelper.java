@@ -4,8 +4,8 @@ import cn.hutool.core.lang.Assert;
 import com.google.common.collect.Maps;
 import com.jayqqaa12.im.common.util.NodeKit;
 import com.jayqqaa12.im.gateway.protool.base.RespChannel;
-import com.jayqqaa12.im.gateway.protool.model.dto.RetryDTO;
-import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
+import com.jayqqaa12.im.common.model.vo.RetryVo;
+import com.jayqqaa12.im.common.model.vo.TcpRespVO;
 import com.jayqqaa12.jbase.util.Executors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +78,7 @@ public class SendHelper {
    *
    * @param response
    */
-  public void send(TcpRespVO response,boolean forward) {
+  public void send(TcpRespVO response, boolean forward) {
 
     //标示一下当前节点
     response.setNodeId(NodeKit.getNodeId());
@@ -91,10 +91,10 @@ public class SendHelper {
       respChannel.resp(response);
     }
 
-    //如果本地为空 是否转发
-    if (list.isEmpty()&&forward) {
-      //从当前重发队列移除
-      removeRetryMsg(response.getMsgId());
+    if(list.isEmpty()) removeRetryMsg(response.getRespId());
+
+    //如果可能是多平台登录 都要判断一下是否在其他节点有登录进行转发
+    if (forward) {
       forwardHelper.forward(response.getDest(), response);
     }
 
@@ -106,7 +106,7 @@ public class SendHelper {
   }
 
 
-  public void sendAndRetry(TcpRespVO response ) {
+  public void sendAndRetry(TcpRespVO response) {
 
     sendAndRetry(response, true);
   }
@@ -118,16 +118,16 @@ public class SendHelper {
    */
   public void sendAndRetry(TcpRespVO response, boolean forward) {
 
-    Assert.notNull(response.getMsgId(), "msg id can't null");
+    Assert.notNull(response.getRespId(), "msg id can't null");
 
     if (response.getRetry() == null) {
-      response.setRetry(new RetryDTO());
+      response.setRetry(new RetryVo());
     }
 
     if (response.getRetry().getRetryTimes() > response.getRetry().getMaxRetryTimes()) {
-      removeRetryMsg(response.getMsgId());
+      removeRetryMsg(response.getRespId());
 
-      log.error("目标{} 重发失败 msgid={}", response.getDest(), response.getMsgId());
+      log.error("目标{} 重发失败 msgid={}", response.getDest(), response.getRespId());
       return;
     }
     boolean localStatus = regHelper.getLocalStatus(response.getDest());
@@ -138,9 +138,9 @@ public class SendHelper {
       //如果是转发的消息 本地不在线就说明不在线
       if (!forward) status = regHelper.getOnlineStatus(response.getDest());
 
-      if(!status){
-        removeRetryMsg(response.getMsgId());
-        log.info("目标 {}不在线 存储为离线消息 {}", response.getDest(), response.getMsgId());
+      if (!status) {
+        removeRetryMsg(response.getRespId());
+        log.info("目标 {}不在线 存储为离线消息 {}", response.getDest(), response.getRespId());
       }
       return;
     }
@@ -151,13 +151,13 @@ public class SendHelper {
     // 加入重发队列
     response.setTimestamp(getNextTime(response.getRetry().getRetryTimes()));
 
-    msgMap.put(response.getMsgId(), response);
+    msgMap.put(response.getRespId(), response);
     delayQueue.add(response);
 
     //  修改消息重试次数
     response.getRetry().setRetryTimes(response.getRetry().getRetryTimes() + 1);
 
-    send(response,forward);
+    send(response, forward);
 
   }
 
@@ -165,11 +165,11 @@ public class SendHelper {
   /**
    * 移除重发的消息
    *
-   * @param msgId
+   * @param respId
    */
-  public void removeRetryMsg(Long msgId) {
+  public void removeRetryMsg(Long respId) {
 
-    Optional.ofNullable(msgMap.remove(msgId)).ifPresent((req) -> {
+    Optional.ofNullable(msgMap.remove(respId)).ifPresent((req) -> {
       delayQueue.remove(req);
     });
   }

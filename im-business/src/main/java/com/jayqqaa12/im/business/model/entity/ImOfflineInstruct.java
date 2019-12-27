@@ -26,7 +26,7 @@ public class ImOfflineInstruct implements Serializable {
 
     private Long uid;
 
-    private String content;
+    private Object content;
 
 
 }

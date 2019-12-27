@@ -1,6 +1,6 @@
 package com.jayqqaa12.im.gateway.receiver;
 
-import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
+import com.jayqqaa12.im.common.model.vo.TcpRespVO;
 import com.jayqqaa12.im.gateway.support.SendHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

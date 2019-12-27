@@ -3,11 +3,12 @@ package com.jayqqaa12.im.gateway.protool.route;
 import cn.hutool.core.lang.Assert;
 import com.jayqqaa12.im.common.model.consts.Req;
 import com.jayqqaa12.im.common.model.consts.Resp;
-import com.jayqqaa12.im.gateway.protool.model.dto.RegInfoDTO;
+import com.jayqqaa12.im.common.model.dto.RegInfoDTO;
+import com.jayqqaa12.im.common.model.vo.TcpReqVO;
 import com.jayqqaa12.im.gateway.protool.base.Route;
 import com.jayqqaa12.im.gateway.protool.base.Router;
+import com.jayqqaa12.im.gateway.protool.base.RouterChain;
 import com.jayqqaa12.im.gateway.protool.base.TcpContext;
-import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
 import com.jayqqaa12.im.gateway.support.RegHelper;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,8 @@ public class RegRoute implements Router<RegInfoDTO> {
 
     context.setLogin(true);
     context.response(req, Resp.OK);
+
+
 
   }
 

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.jayqqaa12.im.common.model.consts.Resp;
-import com.jayqqaa12.im.common.model.vo.RpcDTO;
+import com.jayqqaa12.im.common.model.dto.RpcDTO;
 import com.jayqqaa12.im.common.util.ValidatorKit;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;

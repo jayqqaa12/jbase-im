@@ -3,8 +3,8 @@ package com.jayqqaa12.im.gateway.protool.base;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.jayqqaa12.im.common.model.consts.Resp;
-import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
-import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
+import com.jayqqaa12.im.common.model.vo.TcpReqVO;
+import com.jayqqaa12.im.common.model.vo.TcpRespVO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
