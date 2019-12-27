@@ -18,77 +18,80 @@ import java.util.concurrent.TimeUnit;
 @AllArgsConstructor
 public class TcpRespVO<T> implements Delayed {
 
-    protected String uuid;   // 请求的唯一标示
-    protected Integer code;
-    protected Integer reqCode;
-    protected String message;
-    protected Long timestamp;
-    protected T data;
+  protected String uuid;   // 请求的唯一标示
+  protected Integer code;
+  protected Integer reqCode;
+  protected String message;
+  protected Long timestamp;
+  protected T data;
 
-    //唯一标识 用来防止重发的重复
-    private Long msgId;
+  //节点id
+  private String nodeId;
 
-    private String dest;
+  //唯一标识 用来防止重发的重复
+  private Long msgId;
 
-
-    private transient RetryDTO retry;
-
-
-    public static TcpRespVO heart() {
-        return TcpRespVO.builder().code(Resp.HEART).build();
-    }
+  private String dest;
 
 
-    public static TcpRespVO<Object> response(Integer code, Object data, String dest,Long msgId ) {
-        return response(code, null, data, dest, msgId );
-    }
+  private transient RetryDTO retry;
 
 
-    public static TcpRespVO<Object> response(Integer code, Object data, String dest ) {
-        return response(code, null, data, dest, IdWorker.getId());
-    }
-
-    public static TcpRespVO<Object> response(Integer code, String msg, Object data, String dest, Long msgId) {
-        return TcpRespVO.builder()
-                .code(code)
-                .msgId(msgId)
-                .message(msg)
-                .timestamp(System.currentTimeMillis())
-                .data(data)
-                .dest(dest)
-                .build();
-
-    }
-
-    public static TcpRespVO<Object> response(TcpReqVO request, Integer code, Object data) {
-        return response(request, code, null, data);
-    }
-
-    public static TcpRespVO<Object> response(TcpReqVO request, Integer code, String msg, Object data) {
-
-        return TcpRespVO.builder()
-                .uuid(request.getUuid())
-                .code(code)
-                .reqCode(request.getCode())
-                .message(msg)
-                .timestamp(System.currentTimeMillis())
-                .data(data)
-                .build();
-
-    }
-
-    @Override
-    public long getDelay(TimeUnit unit) {
-        return unit.convert(timestamp - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
-    }
+  public static TcpRespVO heart() {
+    return TcpRespVO.builder().code(Resp.HEART).build();
+  }
 
 
-    @Override
-    public int compareTo(Delayed o) {
+  public static TcpRespVO<Object> response(Integer code, Object data, String dest, Long msgId) {
+    return response(code, null, data, dest, msgId);
+  }
 
-        TcpRespVO resp = (TcpRespVO) o;
-        return this.getTimestamp().compareTo(resp.getTimestamp());
-    }
+
+  public static TcpRespVO<Object> response(Integer code, Object data, String dest) {
+    return response(code, null, data, dest, IdWorker.getId());
+  }
+
+  public static TcpRespVO<Object> response(Integer code, String msg, Object data, String dest, Long msgId) {
+    return TcpRespVO.builder()
+      .code(code)
+      .msgId(msgId)
+      .message(msg)
+      .timestamp(System.currentTimeMillis())
+      .data(data)
+      .dest(dest)
+      .build();
+
+  }
+
+  public static TcpRespVO<Object> response(TcpReqVO request, Integer code, Object data) {
+    return response(request, code, null, data);
+  }
+
+  public static TcpRespVO<Object> response(TcpReqVO request, Integer code, String msg, Object data) {
+
+    return TcpRespVO.builder()
+      .uuid(request.getUuid())
+      .code(code)
+      .reqCode(request.getCode())
+      .message(msg)
+      .timestamp(System.currentTimeMillis())
+      .data(data)
+      .build();
+
+  }
+
+  @Override
+  public long getDelay(TimeUnit unit) {
+    return unit.convert(timestamp - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+  }
+
+
+  @Override
+  public int compareTo(Delayed o) {
+
+    TcpRespVO resp = (TcpRespVO) o;
+    return this.getTimestamp().compareTo(resp.getTimestamp());
+  }
 
 
 }

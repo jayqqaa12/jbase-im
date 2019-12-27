@@ -13,7 +13,7 @@ import java.util.Set;
  * @author jinyong
  * @date 2019/9/30 16:08
  */
-public class ValidatorUtil {
+public class ValidatorKit {
     private static final Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     public static<T> void validate(@Valid T obj){

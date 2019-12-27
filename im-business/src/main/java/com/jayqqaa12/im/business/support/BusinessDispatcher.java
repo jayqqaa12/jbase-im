@@ -1,13 +1,11 @@
-package com.jayqqaa12.im.business.handler;
+package com.jayqqaa12.im.business.support;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
-import com.jayqqaa12.im.business.model.Handler;
-import com.jayqqaa12.im.business.model.IHandler;
 import com.jayqqaa12.im.common.model.consts.Resp;
-import com.jayqqaa12.im.common.model.vo.RpcVo;
-import com.jayqqaa12.im.common.util.ValidatorUtil;
+import com.jayqqaa12.im.common.model.vo.RpcDTO;
+import com.jayqqaa12.im.common.util.ValidatorKit;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -42,14 +40,15 @@ public class BusinessDispatcher {
 
   }
 
-  public Object handler(RpcVo req) throws Exception {
+  public Object handler(RpcDTO req) throws Exception {
     //  根据请求码去调用对应的服务
 
     IHandler handler = handlerMap.get(req.getCode());
     if (handler == null) throw new BusinessException(Resp.CMD_ERROR);
+
     Type type = ((ParameterizedType) (handler.getClass().getGenericInterfaces())[0]).getActualTypeArguments()[0];
     if (type.getTypeName().equals("java.lang.Object"))
-      return handler.handle(req.getData());
+      return handler.handle(req, req.getData());
     else {
       Object obj = req.getData();
       if (obj instanceof JSONObject) {
@@ -57,8 +56,8 @@ public class BusinessDispatcher {
       } else if (obj instanceof JSONArray) {
         obj = ((JSONArray) obj).toJavaObject(type);
       }
-      ValidatorUtil.validate(obj);
-      return handler.handle(obj);
+      ValidatorKit.validate(obj);
+      return handler.handle(req,obj);
     }
 
   }

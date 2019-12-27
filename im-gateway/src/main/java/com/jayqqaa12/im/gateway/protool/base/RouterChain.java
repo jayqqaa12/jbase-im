@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.gateway.protool.handler;
+package com.jayqqaa12.im.gateway.protool.base;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -7,10 +7,7 @@ import com.google.common.collect.Multimap;
 import com.jayqqaa12.im.common.model.consts.Req;
 import com.jayqqaa12.im.common.model.consts.Resp;
 import com.jayqqaa12.im.common.model.consts.VersionEnum;
-import com.jayqqaa12.im.common.util.ValidatorUtil;
-import com.jayqqaa12.im.gateway.protool.model.tcp.Route;
-import com.jayqqaa12.im.gateway.protool.model.tcp.Router;
-import com.jayqqaa12.im.gateway.protool.model.tcp.TcpContext;
+import com.jayqqaa12.im.common.util.ValidatorKit;
 import com.jayqqaa12.im.gateway.protool.model.vo.RouterVo;
 import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
@@ -79,7 +76,7 @@ public class RouterChain {
           obj = ((JSONArray) obj).toJavaObject(type);
         }
 
-        ValidatorUtil.validate(obj);
+        ValidatorKit.validate(obj);
         router.getRouter().handle(context, req, obj);
       }
     }

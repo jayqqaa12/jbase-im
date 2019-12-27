@@ -4,9 +4,9 @@ import cn.hutool.core.lang.Assert;
 import com.jayqqaa12.im.common.model.consts.Req;
 import com.jayqqaa12.im.common.model.consts.Resp;
 import com.jayqqaa12.im.gateway.protool.model.dto.RegInfoDTO;
-import com.jayqqaa12.im.gateway.protool.model.tcp.Route;
-import com.jayqqaa12.im.gateway.protool.model.tcp.Router;
-import com.jayqqaa12.im.gateway.protool.model.tcp.TcpContext;
+import com.jayqqaa12.im.gateway.protool.base.Route;
+import com.jayqqaa12.im.gateway.protool.base.Router;
+import com.jayqqaa12.im.gateway.protool.base.TcpContext;
 import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
 import com.jayqqaa12.im.gateway.support.RegHelper;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
@@ -30,7 +30,7 @@ public class RegRoute implements Router<RegInfoDTO> {
   public void handle(TcpContext context, TcpReqVO req, RegInfoDTO info) {
     if (context.isLogin()) return;
 
-    //todo 为方便测试直接用客户端传过来的userid 实践使用中应该从token中获取
+    //todo 为方便测试直接用客户端传过来的userid 实践使用中应该从token中获取 取消下面注释
 //    info.setUserId(null);
 
     Assert.isTrue(info.getDevice() != null || info.getToken() != null, "token or device can't null");

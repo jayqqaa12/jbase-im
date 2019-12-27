@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.business.model;
+package com.jayqqaa12.im.business.support;
 
 import com.jayqqaa12.im.common.model.consts.VersionEnum;
 import org.springframework.stereotype.Component;

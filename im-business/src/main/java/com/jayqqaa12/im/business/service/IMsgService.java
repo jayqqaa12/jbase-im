@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IMsgService extends IService<ImMsg> {
 
+    void saveMsg(ImMsg msg);
 }

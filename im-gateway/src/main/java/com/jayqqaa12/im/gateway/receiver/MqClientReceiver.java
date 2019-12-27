@@ -4,6 +4,7 @@ import com.jayqqaa12.im.gateway.protool.model.vo.TcpRespVO;
 import com.jayqqaa12.im.gateway.support.SendHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,12 +22,12 @@ public class MqClientReceiver {
     @Autowired
     SendHelper sendHelper;
 
-//    @KafkaListener(topics = "${topic_forward}")
+    @KafkaListener(topics = "${topic_client}")
     public void receiver(TcpRespVO response) {
 
         log.info("MqClientReceiver {}", response);
 
-        sendHelper.sendAndRetry(response);
+        sendHelper.sendAndRetryForLocal(response);
 
     }
 

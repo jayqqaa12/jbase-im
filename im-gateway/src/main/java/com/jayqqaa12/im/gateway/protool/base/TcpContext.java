@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.gateway.protool.model.tcp;
+package com.jayqqaa12.im.gateway.protool.base;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;

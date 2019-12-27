@@ -1,7 +1,7 @@
 package com.jayqqaa12.im.gateway.protool.model.vo;
 
-import com.jayqqaa12.im.gateway.protool.model.tcp.Route;
-import com.jayqqaa12.im.gateway.protool.model.tcp.Router;
+import com.jayqqaa12.im.gateway.protool.base.Route;
+import com.jayqqaa12.im.gateway.protool.base.Router;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

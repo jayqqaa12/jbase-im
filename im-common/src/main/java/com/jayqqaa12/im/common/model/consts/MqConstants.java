@@ -6,9 +6,9 @@ package com.jayqqaa12.im.common.model.consts;
  **/
 public class MqConstants {
 
-  public static final String MQ_FORWARD="mq_tcp_forward_";
+  public static final String MQ_FORWARD = "mq_tcp_forward_";
 
-  public static final String MQ_CLIENT="mq_tcp_client_";
+  public static final String MQ_CLIENT = "mq_tcp_client_"   ;
 
 
 }

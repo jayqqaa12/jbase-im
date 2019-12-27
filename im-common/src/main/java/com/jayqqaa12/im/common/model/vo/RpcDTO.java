@@ -10,11 +10,11 @@ import lombok.experimental.Accessors;
  **/
 @Data
 @Accessors(chain = true)
-public class RpcVo {
+public class RpcDTO {
 
   //device 和uid 二选一
 
-  private Integer userId;
+  private Long userId;
   private String device;
 
   private String uuid;   // 请求的唯一标示 请保证重发的消息uuid相同

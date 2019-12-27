@@ -1,8 +1,8 @@
 package com.jayqqaa12.im.gateway.protool.route;
 
-import com.jayqqaa12.im.gateway.protool.model.tcp.Route;
-import com.jayqqaa12.im.gateway.protool.model.tcp.Router;
-import com.jayqqaa12.im.gateway.protool.model.tcp.TcpContext;
+import com.jayqqaa12.im.gateway.protool.base.Route;
+import com.jayqqaa12.im.gateway.protool.base.Router;
+import com.jayqqaa12.im.gateway.protool.base.TcpContext;
 import com.jayqqaa12.im.common.model.consts.Req;
 import com.jayqqaa12.im.gateway.protool.model.vo.TcpReqVO;
 import com.jayqqaa12.im.gateway.support.RegHelper;
