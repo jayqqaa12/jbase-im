@@ -11,6 +11,7 @@ import com.jayqqaa12.im.common.client.SendClient;
 import com.jayqqaa12.im.common.model.consts.Req;
 import com.jayqqaa12.im.common.model.consts.Resp;
 import com.jayqqaa12.im.common.model.dto.RpcDTO;
+import com.jayqqaa12.im.common.model.vo.TcpRespVO;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class MsgHandler implements IHandler<SendMsgDTO> {
   public Object handle(RpcDTO req, SendMsgDTO data) {
     //单聊
 
-    if (SessionType.SINGLE.equals( data.getSessionType()) ) {
+    if (SessionType.SINGLE.equals(data.getSessionType())) {
       ImMsg msg = new ImMsg();
       //收到消息就创建id 保存到数据库的时候再创建可能有一定延迟 更大限度保证消息的有序性
       msg.setId(IdWorker.getId());
@@ -43,15 +44,14 @@ public class MsgHandler implements IHandler<SendMsgDTO> {
       msgService.saveMsg(msg);
 
       // 推送给接受用户
-      sendClient.send(data.getRecvUid().toString(), req.getCode(),msg);
+      sendClient.send(TcpRespVO.response(req.getCode(), msg, data.getRecvUid().toString(), msg.getId()));
 
       // 推送给发送用户 因为可能存在多个平台
-      sendClient.send(req.getUserId().toString(), req.getCode(),msg);
+      sendClient.send(TcpRespVO.response(req.getCode(), msg, data.getRecvUid().toString(), msg.getId()));
 
 
       return msg.getId();
-    }
-    else{
+    } else {
       //todo 群聊
       throw new BusinessException(Resp.CMD_ERROR);
 

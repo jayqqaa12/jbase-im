@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * 业务层可以通过这个client 来主动发送消息给指定的用户
- *
+ * <p>
  * 可靠性通过MQ保证
  *
  * @author: 12
@@ -28,32 +28,33 @@ public class SendClient {
   KafkaTemplate kafkaTemplate;
 
   /**
-   *  发送消息给目标用户
-   *
+   * 发送消息给目标用户
+   * <p>
    * 通过MQ发送给 网关节点
+   *
    * @return
    */
-  public boolean send(String  dest, int code, Object data) {
+  public boolean send(String dest, int code, Object data) {
     //通过dest 查询到 当前用户在那个gateway 节点 因为是多平台可能有多个节点都在
 
-    List<String > list=getOnlineDest(dest);
+    List<String> list = getOnlineDest(dest);
 
     for (String node : list) {
       //指定节点 发送 MQ消息
-      kafkaTemplate.send(MqConstants.MQ_CLIENT + node, TcpRespVO.response(code,data,dest));
+      kafkaTemplate.send(MqConstants.MQ_CLIENT + node, TcpRespVO.response(code, data, dest));
     }
     return !list.isEmpty();
   }
 
 
-  public boolean send(String  dest, TcpRespVO respVO) {
+  public boolean send(TcpRespVO respVO) {
     //通过dest 查询到 当前用户在那个gateway 节点 因为是多平台可能有多个节点都在
 
-    List<String > list=getOnlineDest(dest);
+    List<String> list = getOnlineDest(respVO.getDest());
 
     for (String node : list) {
       //指定节点 发送 MQ消息
-      kafkaTemplate.send(MqConstants.MQ_CLIENT + node,respVO);
+      kafkaTemplate.send(MqConstants.MQ_CLIENT + node, respVO);
     }
     return !list.isEmpty();
   }

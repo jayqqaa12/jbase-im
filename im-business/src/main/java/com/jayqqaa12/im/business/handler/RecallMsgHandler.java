@@ -75,6 +75,6 @@ public class RecallMsgHandler implements IHandler<RecallMsgDTO> {
 
     offlineInstructService.save(offlineInstruct);
 
-    sendClient.send(uid.toString(), offlineInstruct.getContent().setRespId(offlineInstruct.getId()));
+    sendClient.send(offlineInstruct.getContent().setRespId(offlineInstruct.getId()));
   }
 }

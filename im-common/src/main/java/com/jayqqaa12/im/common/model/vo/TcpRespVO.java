@@ -43,9 +43,9 @@ public class TcpRespVO<T> implements Delayed {
   }
 
 
-//  public static TcpRespVO<Object> response(Integer code, Object data, String dest, Long msgId) {
-//    return response(code, null, data, dest, msgId);
-//  }
+  public static TcpRespVO<Object> response(Integer code, Object data, String dest, Long msgId) {
+    return response(code, null, data, dest, msgId);
+  }
 
 
   public static TcpRespVO<Object> response(Integer code, Object data, String dest) {
