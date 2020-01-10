@@ -1,5 +1,6 @@
 package com.jayqqaa12.im.business.handler;
 
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.jayqqaa12.im.business.model.consts.SessionType;
 import com.jayqqaa12.im.business.model.dto.RecallMsgDTO;
 import com.jayqqaa12.im.business.model.entity.ImMsg;
@@ -67,14 +68,16 @@ public class RecallMsgHandler implements IHandler<RecallMsgDTO> {
 
 
   private void send(int code, Long uid, RecallMsgDTO data) {
+    long id = IdWorker.getId();
 
     //存离线指令 给其他没有上线的客户端使用
     ImOfflineInstruct offlineInstruct = new ImOfflineInstruct()
-      .setUid(uid).
-        setContent(TcpRespVO.response(code, data, uid.toString()));
+      .setUid(uid)
+      .setId(id)
+      .setContent(TcpRespVO.response(code, data, uid.toString(), id));
 
     offlineInstructService.save(offlineInstruct);
 
-    sendClient.send(offlineInstruct.getContent().setRespId(offlineInstruct.getId()));
+    sendClient.send(offlineInstruct.getContent());
   }
 }

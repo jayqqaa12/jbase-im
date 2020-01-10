@@ -10,53 +10,54 @@ import lombok.extern.slf4j.Slf4j;
 public class RespChannel implements Comparable<RespChannel> {
 
 
-    private Channel channel;
+  private Channel channel;
 
-    public RespChannel(Channel channel) {
-        this.channel = channel;
+  public RespChannel(Channel channel) {
+    this.channel = channel;
+  }
+
+
+  public void close() {
+
+    if (channel.isActive()) channel.close();
+  }
+
+  public void resp(TcpRespVO response) {
+
+    //这里不直接flush 通过 netty 延迟flush 处理器自动flush 提高性能
+    channel.write((response));
+
+    log.info("发送消息 resp= {} ", JSON.toJSONString(response));
+
+  }
+
+
+  @Override
+  public int compareTo(RespChannel o) {
+    return this.channel.id().compareTo(o.channel.id());
+  }
+
+  @Override
+  public int hashCode() {
+    return channel.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+
+    if (obj instanceof Channel) {
+      return channel.equals(obj);
+    } else if (obj instanceof RespChannel) {
+
+      return channel.equals(((RespChannel) obj).channel);
+    } else {
+      return super.equals(obj);
     }
 
+  }
 
-    public void close() {
-
-        if (channel.isActive()) channel.close();
-    }
-
-    public void resp(TcpRespVO response) {
-
-        channel.writeAndFlush(JSON.toJSONString(response));
-
-        log.info("发送消息 resp= {} ", JSON.toJSONString(response));
-
-    }
-
-
-    @Override
-    public int compareTo(RespChannel o) {
-        return this.channel.id().compareTo(o.channel.id());
-    }
-
-    @Override
-    public int hashCode() {
-        return channel.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-        if (obj instanceof Channel) {
-            return channel.equals(obj);
-        } else if (obj instanceof RespChannel) {
-
-            return channel.equals(((RespChannel) obj).channel);
-        } else {
-            return super.equals(obj);
-        }
-
-    }
-
-    @Override
-    public String toString() {
-        return channel.toString();
-    }
+  @Override
+  public String toString() {
+    return channel.toString();
+  }
 }

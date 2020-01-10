@@ -19,6 +19,8 @@ public class TcpContext implements Cloneable {
 
     private RespChannel respChannel;
 
+    private String  platform;
+
 
     private Long userId;
 

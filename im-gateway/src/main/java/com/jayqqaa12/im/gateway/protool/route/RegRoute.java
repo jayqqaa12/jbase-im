@@ -40,10 +40,11 @@ public class RegRoute implements Router<RegInfoDTO> {
 
     context.setUserId(info.getUserId());
     context.setDevice(info.getDevice());
-
-    regHelper.register(info, context.getRespChannel());
-
+    context.setPlatform(info.getPlatform());
     context.setLogin(true);
+
+    regHelper.register(  context);
+
     context.response(req, Resp.OK);
 
     //登录成功 自动触发登录事件

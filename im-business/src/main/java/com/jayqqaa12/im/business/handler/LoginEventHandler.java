@@ -6,7 +6,7 @@ import com.jayqqaa12.im.common.model.consts.Req;
 import com.jayqqaa12.im.common.model.dto.RpcDTO;
 
 /**
- * 登录后触发的事件
+ * 登录后触发的事件 可主动返回一些相关业务数据
  * @author: 12
  * @create: 2019-12-27 18:04
  **/
@@ -15,9 +15,6 @@ public class LoginEventHandler implements IHandler {
 
   @Override
   public Object handle(RpcDTO req, Object data) {
-
-    //todo 返回离线消息
-
 
 
 

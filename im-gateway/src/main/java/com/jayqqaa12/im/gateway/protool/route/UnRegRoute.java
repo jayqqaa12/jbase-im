@@ -22,7 +22,7 @@ public class UnRegRoute implements Router<Object> {
     @Override
     public void handle(TcpContext context, TcpReqVO req, Object data) {
 
-        regHelper.unregister(context.getRespChannel());
+        regHelper.unregister(context);
 
 
     }

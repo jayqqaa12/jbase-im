@@ -5,7 +5,7 @@ import com.google.common.collect.Multimap;
 import com.jayqqaa12.im.common.model.consts.CacheConstants;
 import com.jayqqaa12.im.common.util.NodeKit;
 import com.jayqqaa12.im.gateway.protool.base.RespChannel;
-import com.jayqqaa12.im.common.model.dto.RegInfoDTO;
+import com.jayqqaa12.im.gateway.protool.base.TcpContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 
@@ -22,10 +21,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class RegHelper {
 
-  private Multimap<String, ServerEntry> deviceMap = LinkedListMultimap.create();
-  private Multimap<Long, ServerEntry> userIdsMap = LinkedListMultimap.create();
-
-  private ConcurrentHashMap<RespChannel, ServerEntry> channelMapUserCache = new ConcurrentHashMap<>();
+  private Multimap<String, RespChannel> deviceMap = LinkedListMultimap.create();
+  private Multimap<Long, RespChannel> userIdsMap = LinkedListMultimap.create();
 
   @Autowired
   private RedisTemplate redisTemplate;
@@ -34,24 +31,22 @@ public class RegHelper {
   SendHelper sendHelper;
 
 
-  public synchronized void register(RegInfoDTO info, RespChannel handler) {
+  public synchronized void register(TcpContext context) {
 
-    check(info);
+    check(context);
 
-    ServerEntry entry = new ServerEntry(info, handler);
 
-    if (info.getDevice() != null) {
-      deviceMap.put(info.getDevice(), entry);
+    if (context.getDevice() != null) {
+      deviceMap.put(context.getDevice(), context.getRespChannel());
     }
-    if (info.getUserId() != null) {
-      userIdsMap.put(info.getUserId(), entry);
+    if (context.getUserId() != null) {
+      userIdsMap.put(context.getUserId(), context.getRespChannel());
     }
 
-    channelMapUserCache.put(handler, entry);
 
     // reg to redis  绑定当前channel 和节点ip
-    redisTemplate.opsForHash().put(CacheConstants.REDIS_TCP_SESSION + info.getUserOrDevice(),
-      info.getPlatform(), NodeKit.getNodeId());
+    redisTemplate.opsForHash().put(CacheConstants.REDIS_TCP_SESSION + context.getUserOrDevice(),
+      context.getPlatform(), NodeKit.getNodeId());
 
   }
 
@@ -71,20 +66,20 @@ public class RegHelper {
 
   public List<RespChannel> getRespChannel(Long uid) {
 
-    Collection<ServerEntry> result = userIdsMap.get(uid);
+    Collection<RespChannel> result = userIdsMap.get(uid);
 
     if (result != null && result.size() > 0) {
-      return result.stream().map(v -> v.responseHandler).collect(Collectors.toList());
+      return result.stream().collect(Collectors.toList());
     }
 
     return Collections.EMPTY_LIST;
   }
 
   public List<RespChannel> getRespChannel(String device) {
-    Collection<ServerEntry> result = deviceMap.get(device);
+    Collection<RespChannel> result = deviceMap.get(device);
 
     if (result != null && result.size() > 0) {
-      return result.stream().map(v -> v.responseHandler).collect(Collectors.toList());
+      return result.stream().collect(Collectors.toList());
     }
 
     return Collections.EMPTY_LIST;
@@ -94,53 +89,39 @@ public class RegHelper {
 
   public Collection<RespChannel> getAllResponseHandler() {
     return deviceMap.values().stream()
-      .map(entry -> entry.responseHandler)
       .collect(Collectors.toList());
   }
 
 
-  public synchronized void unregister(RespChannel handler) {
-    ServerEntry entry = channelMapUserCache.remove(handler);
-    if (entry != null) {
-      deviceMap.remove(entry.info.getDevice(), entry);
-      if (entry.info.isLogin()) {
-        userIdsMap.remove(entry.info.getUserId(), entry);
-      }
+  public synchronized void unregister(TcpContext context) {
 
-      redisTemplate.opsForHash().delete(CacheConstants.REDIS_TCP_SESSION
-        + entry.info.getUserOrDevice(), entry.info.getPlatform());
-
-    }
-  }
-
-  public RegInfoDTO getRegisterInfo(RespChannel respHandler) {
-
-    ServerEntry entry = channelMapUserCache.get(respHandler);
-
-    if (entry != null) {
-      return entry.info;
+    deviceMap.remove(context.getDevice(), context.getRespChannel());
+    if (context.isLogin()) {
+      userIdsMap.remove(context.getUserId(), context.getRespChannel());
     }
 
-    return null;
+    redisTemplate.opsForHash().delete(CacheConstants.REDIS_TCP_SESSION
+      + context.getUserOrDevice(), context.getPlatform());
+
   }
 
 
-  private void check(RegInfoDTO info) {
+  private void check(TcpContext context) {
 
-    if (info.isLogin()) {
-      List<RespChannel> handlerList = getRespChannel(info.getUserId());
+    if (context.isLogin()) {
+      List<RespChannel> handlerList = getRespChannel(context.getUserId());
 
       if (handlerList.size() > 2) {
         handlerList.remove(0).close();
-        log.info("user {} register close before channel ", info.getUserId());
+        log.info("user {} register close before channel ", context.getUserId());
       }
 
     } else {
-      List<RespChannel> handlerList = getRespChannel(info.getDevice());
+      List<RespChannel> handlerList = getRespChannel(context.getDevice());
 
       if (!handlerList.isEmpty()) {
         handlerList.remove(0).close();
-        log.info("user {} register close before channel ", info.getDevice());
+        log.info("user {} register close before channel ", context.getDevice());
       }
     }
 
@@ -162,13 +143,4 @@ public class RegHelper {
     return !getOnlineDest(dest).isEmpty();
   }
 
-  static class ServerEntry {
-    RegInfoDTO info;
-    RespChannel responseHandler;
-
-    ServerEntry(RegInfoDTO info, RespChannel responseHandler) {
-      this.info = info;
-      this.responseHandler = responseHandler;
-    }
-  }
 }

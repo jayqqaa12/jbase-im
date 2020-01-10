@@ -23,6 +23,12 @@
 ![image](https://raw.githubusercontent.com/jayqqaa12/jbase-im/master/doc/2.png)
 
 
+方便二次开发
+
+实现大多数已知的IM功能性，只需按需求裁剪im-business模块功能 即可完成开发
+
+
+
 
 模块划分
 
@@ -46,6 +52,9 @@
 - 正在输入中提示
 - 发送消息
 - 消息撤回
+
+
+
 
  
 

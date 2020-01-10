@@ -3,6 +3,7 @@ package com.jayqqaa12.im.common.client;
 import com.jayqqaa12.im.common.model.consts.CacheConstants;
 import com.jayqqaa12.im.common.model.consts.MqConstants;
 import com.jayqqaa12.im.common.model.vo.TcpRespVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -19,6 +20,7 @@ import java.util.List;
  * @create: 2019-12-26 15:16
  **/
 @Component
+@Slf4j
 public class SendClient {
 
   @Autowired
@@ -35,15 +37,7 @@ public class SendClient {
    * @return
    */
   public boolean send(String dest, int code, Object data) {
-    //通过dest 查询到 当前用户在那个gateway 节点 因为是多平台可能有多个节点都在
-
-    List<String> list = getOnlineDest(dest);
-
-    for (String node : list) {
-      //指定节点 发送 MQ消息
-      kafkaTemplate.send(MqConstants.MQ_CLIENT + node, TcpRespVO.response(code, data, dest));
-    }
-    return !list.isEmpty();
+    return send(TcpRespVO.response(code, data, dest));
   }
 
 
@@ -54,7 +48,11 @@ public class SendClient {
 
     for (String node : list) {
       //指定节点 发送 MQ消息
-      kafkaTemplate.send(MqConstants.MQ_CLIENT + node, respVO);
+      kafkaTemplate.send(MqConstants.MQ_CLIENT + node, respVO ).addCallback(null,(e)->{
+          log.error("send client send msg {} fail {}=",respVO,e);
+      });
+
+
     }
     return !list.isEmpty();
   }

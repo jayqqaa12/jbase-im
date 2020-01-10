@@ -22,8 +22,6 @@ public class RegInfoDTO {
     String platform;
 
 
-    transient boolean isLogin;
-
 
     public String getUserOrDevice() {
         Long id = getUserId();
