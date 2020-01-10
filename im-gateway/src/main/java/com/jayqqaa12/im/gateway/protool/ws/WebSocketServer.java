@@ -30,8 +30,8 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler;
 import io.netty.handler.flush.FlushConsolidationHandler;
 import io.netty.handler.timeout.IdleStateHandler;
-import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.EventExecutorGroup;
+import io.netty.util.concurrent.UnorderedThreadPoolEventExecutor;
 
 import javax.net.ssl.SSLException;
 import java.util.concurrent.TimeUnit;
@@ -50,7 +50,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class WebSocketServer extends NettyServer {
 
-  private EventExecutorGroup eventExecutors = new DefaultEventExecutorGroup(10);
+  private EventExecutorGroup eventExecutors = new UnorderedThreadPoolEventExecutor(10);
 
   private String path = "/";
 

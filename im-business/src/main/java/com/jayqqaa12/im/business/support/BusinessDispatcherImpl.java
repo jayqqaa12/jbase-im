@@ -3,8 +3,9 @@ package com.jayqqaa12.im.business.support;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
+import com.jayqqaa12.im.common.model.ReqContent;
 import com.jayqqaa12.im.common.model.consts.Resp;
-import com.jayqqaa12.im.common.model.dto.RpcDTO;
+import com.jayqqaa12.im.common.rpc.BusinessDispatcher;
 import com.jayqqaa12.im.common.util.ValidatorKit;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import java.util.Map;
  * @create: 2019-12-26 13:28
  **/
 @Component
-public class BusinessDispatcher {
+public class BusinessDispatcherImpl implements BusinessDispatcher {
 
   private Map<Integer, IHandler> handlerMap = Maps.newHashMap();
   @Autowired
@@ -40,7 +41,8 @@ public class BusinessDispatcher {
 
   }
 
-  public Object handler(RpcDTO req) throws Exception {
+  @Override
+  public Object handler(ReqContent req) throws Exception {
     //  根据请求码去调用对应的服务
 
     IHandler handler = handlerMap.get(req.getCode());

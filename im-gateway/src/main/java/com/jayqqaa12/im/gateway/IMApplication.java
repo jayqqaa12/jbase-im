@@ -10,9 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @EnableBasic
-@EnableDb
 @SpringBootApplication
 @ComponentScan("com.jayqqaa12.im")
+@EnableDb
 @MapperScan("com.jayqqaa12.im.*.mapper")
 public class IMApplication {
 

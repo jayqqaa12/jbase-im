@@ -9,8 +9,8 @@ import java.io.Serializable;
 
 /**
  * <p>
- *
-记录离线的指令 （指令可能是删除消息，撤回消息之类的）
+ * <p>
+ * 记录离线的指令 （指令可能是删除消息，撤回消息之类的）
  * </p>
  *
  * @author jobob
@@ -21,13 +21,13 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class ImOfflineInstruct implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private Long id;
+  private Long id;
 
-    private Long uid;
+  private Long uid;
 
-    private TcpRespVO content;
+  private TcpRespVO content;
 
 
 }

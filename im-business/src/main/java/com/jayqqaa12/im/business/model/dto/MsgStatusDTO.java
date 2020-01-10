@@ -1,6 +1,5 @@
 package com.jayqqaa12.im.business.model.dto;
 
-import com.jayqqaa12.im.business.model.consts.SessionType;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -10,13 +9,10 @@ import javax.validation.constraints.NotNull;
  * @create: 2019-12-27 17:11
  **/
 @Data
-public class RecallMsgDTO {
+public class MsgStatusDTO {
 
   @NotNull
   private Long msgId;
-
-  @NotNull
-  private SessionType sessionType;
 
 
 

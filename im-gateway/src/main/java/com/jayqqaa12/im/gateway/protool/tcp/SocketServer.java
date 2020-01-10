@@ -13,8 +13,8 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.flush.FlushConsolidationHandler;
 import io.netty.handler.timeout.IdleStateHandler;
-import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.EventExecutorGroup;
+import io.netty.util.concurrent.UnorderedThreadPoolEventExecutor;
 
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class SocketServer extends NettyServer {
 
-  private EventExecutorGroup eventExecutors = new DefaultEventExecutorGroup(10);
+  private EventExecutorGroup eventExecutors = new UnorderedThreadPoolEventExecutor(10);
 
   private ServerHandler serverHandler = new ServerHandler();
 
@@ -55,6 +55,7 @@ public class SocketServer extends NettyServer {
     pipeline.addLast(new FlushConsolidationHandler(5, true));
 
     pipeline.addLast(eventExecutors, serverHandler);
+
 
 
   }

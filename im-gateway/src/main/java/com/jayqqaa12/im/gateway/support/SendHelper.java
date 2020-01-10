@@ -140,7 +140,7 @@ public class SendHelper {
 
       if (!status) {
         removeRetryMsg(response.getRespId());
-        log.info("目标 {}不在线 存储为离线消息 {}", response.getDest(), response.getRespId());
+        log.info("目标 {}不在线 应该存储为离线消息 {}", response.getDest(), response.getRespId());
       }
       return;
     }

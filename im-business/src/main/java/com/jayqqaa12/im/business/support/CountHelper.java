@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 主要实现计数的持久化
- *
+ * <p>
  * todo 修改为原子性更新总数+会话数
  *
  * @author: 12
@@ -16,57 +16,62 @@ import org.springframework.stereotype.Component;
 @Component
 public class CountHelper {
 
-    @Autowired
-    RedisTemplate redisTemplate;
+  @Autowired
+  RedisTemplate redisTemplate;
 
 
-    public void increment(String uid, String sessionId, int value) {
+  private void increment(Long uid, Long sessionId, int value) {
+    redisTemplate.opsForHash().increment(CacheConstants.REDIS_MSG_COUNT + uid, sessionId, value);
+    redisTemplate.opsForHash().increment(CacheConstants.REDIS_MSG_COUNT_TOTAL, uid, value);
+
+  }
+
+  private void decrement(Long uid, Long sessionId, int value) {
+    redisTemplate.opsForHash().increment(CacheConstants.REDIS_MSG_COUNT + uid, sessionId, -value);
+    redisTemplate.opsForHash().increment(CacheConstants.REDIS_MSG_COUNT_TOTAL, uid, -value);
+
+  }
 
 
-        redisTemplate.opsForHash().increment(CacheConstants.REDIS_TCP_COUNT + uid, sessionId, value);
-    }
+  /**
+   * 清空
+   *
+   * @param uid
+   * @param sessionId
+   */
+  public void reset(Long uid, Long sessionId) {
+
+    Integer c = get(uid, sessionId);
+
+    redisTemplate.opsForHash().delete(CacheConstants.REDIS_MSG_COUNT + uid, sessionId);
+
+    redisTemplate.opsForHash().increment(CacheConstants.REDIS_MSG_COUNT_TOTAL, uid, -c);
+  }
+
+  /**
+   * +1
+   *
+   * @param uid
+   * @param sessionId
+   */
+  public void increment(Long uid, Long sessionId) {
+    increment(uid, sessionId, 1);
+  }
+
+  /**
+   * -1
+   *
+   * @param uid
+   * @param sessionId
+   */
+  public void decrement(Long uid, Long sessionId) {
+    decrement(uid, sessionId, 1);
+  }
 
 
-    /**
-     * 清空
-     * @param uid
-     * @param sessionId
-     */
-    public void reset(String uid, String sessionId) {
-        redisTemplate.opsForHash().delete(CacheConstants.REDIS_TCP_COUNT + uid, sessionId);
-
-    }
+  public Integer get(Long uid, Long sessionId) {
+    return (Integer) redisTemplate.opsForHash().get(CacheConstants.REDIS_MSG_COUNT + uid, sessionId);
+  }
 
 
-    public void decrement(String uid, String sessionId, int value) {
-
-        redisTemplate.opsForHash().increment(CacheConstants.REDIS_TCP_COUNT + uid, sessionId, -value);
-    }
-
-
-    /**
-     * +1
-     * @param uid
-     * @param sessionId
-     */
-    public void increment(String uid, String sessionId) {
-        increment(uid, sessionId, 1);
-    }
-
-    /**
-     * -1
-     * @param uid
-     * @param sessionId
-     */
-    public void decrement(String uid, String sessionId) {
-        decrement(uid, sessionId, 1);
-    }
-
-
-    public Integer get(String uid, String sessionId) {
-     return (Integer) redisTemplate.opsForHash().get(CacheConstants.REDIS_TCP_COUNT + uid, sessionId);
-    }
-
- 
- 
 }

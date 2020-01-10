@@ -28,13 +28,19 @@
     <!--<version>2.3.29</version>-->
     <!--</dependency>-->
 
+
+
     <dependency>
       <groupId>com.jayqqaa12</groupId>
       <artifactId>im-business</artifactId>
       <version>1.0.0</version>
     </dependency>
 
-
+    <dependency>
+      <groupId>com.jayqqaa12</groupId>
+      <artifactId>im-common</artifactId>
+      <version>1.0.0</version>
+    </dependency>
 
 
     <dependency>

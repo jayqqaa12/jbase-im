@@ -7,7 +7,6 @@ import com.jayqqaa12.im.common.model.dto.RegInfoDTO;
 import com.jayqqaa12.im.common.model.vo.TcpReqVO;
 import com.jayqqaa12.im.gateway.protool.base.Route;
 import com.jayqqaa12.im.gateway.protool.base.Router;
-import com.jayqqaa12.im.gateway.protool.base.RouterChain;
 import com.jayqqaa12.im.gateway.protool.base.TcpContext;
 import com.jayqqaa12.im.gateway.support.RegHelper;
 import com.jayqqaa12.jbase.spring.exception.BusinessException;
@@ -43,17 +42,15 @@ public class RegRoute implements Router<RegInfoDTO> {
     context.setPlatform(info.getPlatform());
     context.setLogin(true);
 
-    regHelper.register(  context);
+    regHelper.register(context);
 
     context.response(req, Resp.OK);
 
-    //登录成功 自动触发登录事件
-    RouterChain.exec(TcpReqVO.req(Req.BUSINESS_EVENT_LOGIN,null),context);
   }
 
   private void checkToken(RegInfoDTO info) {
 
-    if(info.getToken()==null)return;
+    if (info.getToken() == null) return;
 
     //todo 接入其他系统需要 重写token 验证逻辑 获取uid
 

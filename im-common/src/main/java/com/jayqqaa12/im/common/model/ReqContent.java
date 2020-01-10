@@ -1,4 +1,4 @@
-package com.jayqqaa12.im.common.model.dto;
+package com.jayqqaa12.im.common.model;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.experimental.Accessors;
  **/
 @Data
 @Accessors(chain = true)
-public class RpcDTO {
+public class ReqContent {
 
   //device 和uid 二选一
 

@@ -1,5 +1,8 @@
 package com.jayqqaa12.im.business.service;
 
+import com.jayqqaa12.im.business.model.consts.SessionType;
+import com.jayqqaa12.im.business.model.dto.MsgPageDTO;
+import com.jayqqaa12.im.business.model.entity.ImMsg;
 import com.jayqqaa12.im.business.model.entity.ImSession;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -14,4 +17,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ISessionService extends IService<ImSession> {
 
+    void saveSession(ImMsg msg, SessionType single);
+
+  Object sessionList(Long userId, MsgPageDTO data);
 }
