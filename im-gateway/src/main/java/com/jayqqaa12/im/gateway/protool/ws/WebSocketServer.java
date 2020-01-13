@@ -30,6 +30,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler;
 import io.netty.handler.flush.FlushConsolidationHandler;
 import io.netty.handler.timeout.IdleStateHandler;
+import io.netty.handler.traffic.GlobalChannelTrafficShapingHandler;
 import io.netty.util.concurrent.EventExecutorGroup;
 import io.netty.util.concurrent.UnorderedThreadPoolEventExecutor;
 
@@ -51,6 +52,8 @@ import java.util.concurrent.TimeUnit;
 public class WebSocketServer extends NettyServer {
 
   private EventExecutorGroup eventExecutors = new UnorderedThreadPoolEventExecutor(10);
+  private GlobalChannelTrafficShapingHandler channelTrafficShapingHandler= new GlobalChannelTrafficShapingHandler(eventExecutors,1);
+
 
   private String path = "/";
 
@@ -81,6 +84,8 @@ public class WebSocketServer extends NettyServer {
     // 延迟flush 处理器
     pipeline.addLast(new FlushConsolidationHandler(5, true));
     pipeline.addLast(new NettyHeartHandler(() -> JSON.toJSONString(TcpRespVO.heart()), 60 * 3));
+
+    pipeline.addLast(channelTrafficShapingHandler);
 
     pipeline.addLast(eventExecutors, serverHandler);
   }

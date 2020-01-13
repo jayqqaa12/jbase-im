@@ -13,6 +13,7 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.flush.FlushConsolidationHandler;
 import io.netty.handler.timeout.IdleStateHandler;
+import io.netty.handler.traffic.GlobalChannelTrafficShapingHandler;
 import io.netty.util.concurrent.EventExecutorGroup;
 import io.netty.util.concurrent.UnorderedThreadPoolEventExecutor;
 
@@ -28,6 +29,8 @@ public class SocketServer extends NettyServer {
   private EventExecutorGroup eventExecutors = new UnorderedThreadPoolEventExecutor(10);
 
   private ServerHandler serverHandler = new ServerHandler();
+
+  private GlobalChannelTrafficShapingHandler channelTrafficShapingHandler= new GlobalChannelTrafficShapingHandler(eventExecutors,1);
 
   public SocketServer(int port) throws Exception {
     super(port);
@@ -54,9 +57,10 @@ public class SocketServer extends NettyServer {
     // 延迟flush 处理器
     pipeline.addLast(new FlushConsolidationHandler(5, true));
 
+    pipeline.addLast(channelTrafficShapingHandler);
     pipeline.addLast(eventExecutors, serverHandler);
 
-
+//    Epoll.isAvailable()
 
   }
 
@@ -70,4 +74,7 @@ public class SocketServer extends NettyServer {
     ;
 
   }
+
+
+
 }

@@ -24,10 +24,16 @@ public class RespChannel implements Comparable<RespChannel> {
 
   public void resp(TcpRespVO response) {
 
-    //这里不直接flush 通过 netty 延迟flush 处理器自动flush 提高性能
-    channel.write((response));
 
-    log.info("发送消息 resp= {} ", JSON.toJSONString(response));
+    //判断是否可写
+    if(channel.isActive()&&channel.isWritable()){
+      //这里不直接flush 通过 netty 延迟flush 处理器自动flush 提高性能
+      channel.write((response));
+      log.info("发送消息 resp= {} ", JSON.toJSONString(response));
+    }else{
+      log.error("发送消息失败当前不可写 resp= {} ", JSON.toJSONString(response));
+    }
+
 
   }
 
