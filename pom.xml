@@ -42,7 +42,7 @@
     <zookeeper.version>3.4.6</zookeeper.version>
 
     <mybatisplus-boot-starter.version>3.1.2</mybatisplus-boot-starter.version>
-    <mysql.version>5.1.44</mysql.version>
+    <mysql.version>8.0.28</mysql.version>
 
     <jasypt.version>1.18</jasypt.version>
     <commons-io.version>2.6</commons-io.version>
